@@ -1,0 +1,7 @@
+node_modules
+.idea
+build
+**/yarn-error.log
+**/config/local.json
+mongodb/data
+.DS_Store

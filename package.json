@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "name": "review",
+  "version": "0.0.1",
+  "description": "Project for smart code-review (github-slack)",
+  "main": "index.js",
+  "workspaces": [
+    "events",
+    "github-fetch"
+  ],
+  "repository": "git@github.com:isachivka/review.git",
+  "author": "isachivka <juicy.igor@gmail.com>",
+  "license": "MIT"
+}
