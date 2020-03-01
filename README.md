@@ -16,6 +16,16 @@
 
 ---
 
+### Архитектура
+
+`mongodb` - используется для хранения данных
+`@review/github-fetch` - сервис ходит в GitHub и отправляет данные в `@review/events`
+`@review/events` - сервис сравнивает хранимые в `mongodb` данные с полученными от `@review/github-fetch` и генерирует события для других сервисов
+
+<img src="./docs/arch.svg" width="600" />
+
+---
+
 Временные записи: 
 
 Реакции:
@@ -25,7 +35,6 @@
 3) После получения апрува написать мерджеру и автору
 
 TODO:
-- write architecture docs
 - Add github project with tasks:
     - [@review/github-fetch] Add to query more data, research
     - [@review/events] Store data into mongodb
