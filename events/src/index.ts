@@ -1,5 +1,8 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
+import { PullRequests_repository_pullRequests_nodes } from '@review/github-fetch/src/queries/types/PullRequests';
+
+type PullRequests = (PullRequests_repository_pullRequests_nodes | null)[];
 
 const port = 3000;
 const app = express();
@@ -15,7 +18,8 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
 });
 
 app.put('/put', (request, response) => {
-  console.log(request.body);
+  const pullRequests: PullRequests = request.body;
+  console.log(pullRequests);
   response.status(200).send('Okay');
 });
 
