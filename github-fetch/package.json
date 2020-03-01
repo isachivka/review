@@ -6,10 +6,9 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc && node ./build index",
-    "generate": "apollo codegen:generate --localSchemaFile=schema.graphql --target=typescript --includes=\"src/**/*.ts\" --tagName=gql --addTypename --globalTypesFile=src/types/gqlGlobal.ts types"
+    "generate-types": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
-    "apollo": "^2.24.0",
     "apollo-boost": "^0.4.7",
     "config": "^3.3.0",
     "cron": "^1.8.2",
@@ -19,10 +18,14 @@
     "superagent": "^5.2.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^1.12.2",
     "@types/config": "^0.0.36",
     "@types/node": "^13.7.7",
     "@types/node-cron": "^2.0.3",
     "@types/superagent": "^4.1.7",
-    "typescript": "^3.8.3"
+    "graphql": "^14.6.0",
+    "typescript": "^3.8.3",
+    "@graphql-codegen/typescript": "1.12.2",
+    "@graphql-codegen/typescript-operations": "1.12.2"
   }
 }

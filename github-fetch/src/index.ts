@@ -3,13 +3,13 @@ import cron from 'node-cron';
 import superagent from 'superagent';
 import config from 'config';
 import client, { owner, repository } from './client';
-import { PullRequests } from './queries/types/PullRequests';
 import getPullRequests from './queries/getPullRequests';
+import { PullRequestsQuery } from '../types/graphql';
 
 const putApi = `${config.get('eventsApi')}/put`;
 
 cron.schedule('* * * * *', () => {
-  client.query<PullRequests>({
+  client.query<PullRequestsQuery>({
     query: getPullRequests,
     variables: { owner, repository },
   })
