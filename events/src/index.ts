@@ -1,6 +1,6 @@
 import express from 'express';
 import { MongoClient } from 'mongodb';
-import { PullRequests } from '@review/github-fetch/types/shared';
+import { PullRequests } from '@review/github-fetch/src/types/shared';
 
 const port = 3000;
 const app = express();

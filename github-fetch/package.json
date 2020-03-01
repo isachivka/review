@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node ./build index",
+    "start": "node ./build",
+    "dev": "yarn build && yarn start",
     "generate-types": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {

@@ -5,8 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "node ./build index",
-    "dev": "tsc && node ./build index"
+    "start": "node ./build",
+    "dev": "yarn build && yarn start"
   },
   "dependencies": {
     "config": "^3.3.0",
