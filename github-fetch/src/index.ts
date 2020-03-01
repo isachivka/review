@@ -4,9 +4,11 @@ import superagent from 'superagent';
 import config from 'config';
 import client, { owner, repository } from './client';
 import getPullRequests from './queries/getPullRequests';
-import { PullRequestsQuery } from '../types/graphql';
+import { PullRequestsQuery } from './types/graphql';
 
 const putApi = `${config.get('eventsApi')}/put`;
+
+console.log('[@review/github-fetch] Successfully started');
 
 cron.schedule('* * * * *', () => {
   client.query<PullRequestsQuery>({
@@ -20,7 +22,7 @@ cron.schedule('* * * * *', () => {
           .set('Content-Type', 'application/json')
           .send(data.repository.pullRequests.nodes)
           .then((response) => {
-            console.log('[@review/github-fetch] Successfully send nodes:', response.text);
+            console.log('[@review/github-fetch] Successfully send nodes. Response:', response.text);
           })
           .catch((error) => {
             console.log('[@review/github-fetch] Error send nodes:', error);
