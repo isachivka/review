@@ -5,9 +5,9 @@
 3) После получения апрува написать мерджеру и автору
 
 TODO:
-- generate valid types from graphql schema
-- write architecture docs
+- ~~generate valid types from graphql schema~~
 - ~~eslint~~
+- write architecture docs
 - docker for event
 - docker for github-fetch
     - compose dockers
