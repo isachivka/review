@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node ./build index"
+    "start": "node ./build index",
+    "dev": "tsc && node ./build index"
   },
   "dependencies": {
     "config": "^3.3.0",

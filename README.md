@@ -5,17 +5,16 @@
 3) После получения апрува написать мерджеру и автору
 
 TODO:
+- write architecture docs
 - ~~generate valid types from graphql schema~~
 - ~~eslint~~
-- write architecture docs
-- docker for event
+- ~~docker for event~~
+- compose mongo with events
 - docker for github-fetch
-    - compose dockers
-- add github project with tasks
-
-TASKS:
-- [@review/github-fetch] Add to query more data, research
-- [@review/events] Store data into mongodb
-- [@review/events] Read data from mongodb
-- [@review/events] Add data comparison, generate events architecture (TODO: decompose this task)
-- [@review/slackbot] Add boilerplate for module
+- compose github-fetch
+- Add github project with tasks:
+    - [@review/github-fetch] Add to query more data, research
+    - [@review/events] Store data into mongodb
+    - [@review/events] Read data from mongodb
+    - [@review/events] Add data comparison, generate events architecture (TODO: decompose this task)
+    - [@review/slackbot] Add boilerplate for module

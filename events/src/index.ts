@@ -6,12 +6,16 @@ const port = 3000;
 const app = express();
 app.use(express.json());
 
-const url = 'mongodb://localhost:27017';
-const dbName = 'review';
+const url = 'mongodb://mongodb/review';
 
-MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
-  const db = client.db(dbName);
-  console.log("[@review/events] Connected successfully to server", err, db);
+MongoClient.connect(url, (err, client) => {
+  if (err) {
+    console.log('[@review/events] Connection to mongodb failed', err);
+    client.close();
+    return;
+  }
+
+  console.log('[@review/events] Connected successfully to server');
   client.close();
 });
 
