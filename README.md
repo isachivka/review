@@ -1,3 +1,16 @@
+# Review
+
+Для локальной разработки:
+
+1. Добавьте в /etc/hosts
+```
+127.0.0.1 events
+127.0.0.1 mongodb
+```
+---
+
+Временные записи: 
+
 Реакции:
 1) После открытия пулл-реквеста написать ревьюверам, если они есть
     1.1) Если пулл-реквест долго не ревьювят писать автору и ревьюверам, если они есть
@@ -6,13 +19,6 @@
 
 TODO:
 - write architecture docs
-- ~~generate valid types from graphql schema~~
-- ~~eslint~~
-- ~~docker for event~~
-- ~~compose mongo with events~~
-- ~~docker for github-fetch~~
-- ~~compose github-fetch~~
-- write local run scripts
 - Add github project with tasks:
     - [@review/github-fetch] Add to query more data, research
     - [@review/events] Store data into mongodb

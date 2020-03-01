@@ -9,6 +9,9 @@
     "github-fetch"
   ],
   "scripts": {
+    "mongodb": "docker run -p 27017:27017 mongo",
+    "events": "yarn workspace @review/events dev",
+    "github-fetch": "yarn workspace @review/github-fetch dev",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "repository": "git@github.com:isachivka/review.git",
