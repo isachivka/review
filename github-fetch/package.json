@@ -1,5 +1,5 @@
 {
-  "name": "github-fetch",
+  "name": "@review/github-fetch",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
