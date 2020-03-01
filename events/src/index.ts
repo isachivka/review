@@ -3,12 +3,14 @@ import { MongoClient } from 'mongodb';
 
 const port = 3000;
 const app = express();
+app.use(express.json());
+
 const url = 'mongodb://localhost:27017';
 const dbName = 'review';
 
 MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
   const db = client.db(dbName);
-  console.log(err, db, "Connected successfully to server");
+  console.log("[@review/events] Connected successfully to server", err, db);
   client.close();
 });
 
@@ -18,5 +20,5 @@ app.put('/put', (request, response) => {
 });
 
 app.listen(port, () => {
-  console.log(`Event generator listen port ${port}`);
+  console.log(`[@review/events] Listen port ${port}`);
 });
