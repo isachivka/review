@@ -9,9 +9,10 @@ TODO:
 - ~~generate valid types from graphql schema~~
 - ~~eslint~~
 - ~~docker for event~~
-- compose mongo with events
-- docker for github-fetch
-- compose github-fetch
+- ~~compose mongo with events~~
+- ~~docker for github-fetch~~
+- ~~compose github-fetch~~
+- write local run scripts
 - Add github project with tasks:
     - [@review/github-fetch] Add to query more data, research
     - [@review/events] Store data into mongodb

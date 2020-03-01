@@ -1,5 +1,5 @@
 {
-  "eventsApi": "http://localhost:3000",
+  "eventsApi": "http://events:3000",
   "api": "https://api.github.com/graphql",
   "token": "*",
   "owner": "*",

@@ -16,6 +16,16 @@ services:
     depends_on:
       - mongodb
 
+  github-fetch:
+    build:
+      context: .
+      dockerfile: ./github-fetch.Dockerfile
+    container_name: "github-fetch"
+    networks:
+      - review-network
+    depends_on:
+      - events
+
 networks:
   review-network:
     driver: bridge
