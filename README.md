@@ -3,10 +3,17 @@
 Для локальной разработки:
 
 1. Добавьте в /etc/hosts
-```
-127.0.0.1 events
-127.0.0.1 mongodb
-```
+    ```
+    127.0.0.1 events
+    127.0.0.1 mongodb
+    ```
+2. Сконфигурируйте [@review/github-fetch](github-fetch/README.md)
+2. Запустите mongodb - `yarn mongodb`
+3. Запустите @review/events - `yarn events`
+4. Запустите @review/github-fetch - `yarn github-fetch`
+
+**Важен порядок**
+
 ---
 
 Временные записи: 
