@@ -12,6 +12,11 @@ MongoClient.connect(url, { useUnifiedTopology: true }, (err, client) => {
   client.close();
 });
 
+app.put('/put', (request, response) => {
+  console.log(request.body);
+  response.status(200).send('Okay');
+});
+
 app.listen(port, () => {
   console.log(`Event generator listen port ${port}`);
 });
