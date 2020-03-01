@@ -4,13 +4,12 @@ FROM node:lts-alpine as buildImage
 WORKDIR /home/review
 
 COPY yarn.lock package.json ./
-COPY events/package.json ./events/
 COPY github-fetch/package.json ./github-fetch/
 
 RUN yarn --frozen-lockfile
 
 COPY . .
-RUN cd events && yarn build
+RUN cd github-fetch && yarn build
 
 # Run image
 
@@ -19,11 +18,12 @@ FROM node:lts-alpine
 WORKDIR /home/review
 
 COPY yarn.lock package.json ./
-COPY events/package.json ./events/
+COPY github-fetch/package.json ./github-fetch/
 
 RUN yarn --production --frozen-lockfile
 
-COPY --from=buildImage /home/review/events/build ./events/build
+COPY --from=buildImage /home/review/github-fetch/build ./github-fetch/build
+COPY --from=buildImage /home/review/github-fetch/config ./github-fetch/config
 
-EXPOSE 3000
-CMD cd events && yarn start
+
+CMD cd github-fetch && yarn start
