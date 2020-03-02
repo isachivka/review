@@ -4,7 +4,7 @@ const dbName = 'review';
 const url = `mongodb://mongodb/${dbName}`;
 let init = true;
 
-function doMongo(callback: (db: Db, callback: () => void) => void) {
+function doMongo(callback: (db: Db, callback: () => void) => void): void {
   MongoClient.connect(url, (err, client) => {
     if (err) {
       console.log('[@review/events] Connection to mongodb failed', err);
