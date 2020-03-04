@@ -12,7 +12,7 @@ interface Logger {
   error: consoleLog;
 }
 
-class Console implements Logger {
+class ReviewConsole implements Logger {
   _module: string;
 
   constructor(module: string) {
@@ -40,8 +40,8 @@ class Log {
   githubFetch: Logger;
 
   constructor() {
-    this.events = new Console(modulesLocale.events);
-    this.githubFetch = new Console(modulesLocale.gitHubFetch);
+    this.events = new ReviewConsole(modulesLocale.events);
+    this.githubFetch = new ReviewConsole(modulesLocale.gitHubFetch);
   }
 }
 
