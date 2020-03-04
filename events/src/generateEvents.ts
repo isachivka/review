@@ -1,9 +1,9 @@
 import { PullRequests } from '@review/github-fetch/src/types/shared';
 
 type Event = {
-  eventType: string;
+  type: string;
   // TODO: Specify a different type
-  eventData: any;
+  data: any;
 }
 
 type Error = string;
@@ -35,7 +35,7 @@ async function generateEvents(
   );
 
   /**
-   * Из массива результатов печатаем все опибки, остальные возвращаем
+   * Из массива результатов печатаем все ошибки, остальные возвращаем
    */
   const events = generatorsResult.reduce((acc: Event[], result) => {
     if (typeof result === 'string') {
