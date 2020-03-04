@@ -6,7 +6,8 @@
   "main": "index.js",
   "workspaces": [
     "events",
-    "github-fetch"
+    "github-fetch",
+    "logs"
   ],
   "scripts": {
     "mongodb": "docker run -p 27017:27017 -v `pwd`/mongodb/data:/data/db mongo",
