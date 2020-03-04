@@ -1,6 +1,7 @@
 import express from 'express';
 import { PullRequests } from '@review/github-fetch/src/types/shared';
 import doMongo from './mongo';
+import logs from '@review/logs';
 
 const port = 3000;
 const app = express();
@@ -15,11 +16,11 @@ app.put('/put', (request, response) => {
     const prevPullRequests = await collection.find({}).toArray();
     await collection.deleteMany({});
     await collection.insertMany(pullRequests);
-    console.log({ prevPullRequests, pullRequests });
+    logs.events.log({ prevPullRequests, pullRequests });
     callback();
   });
 });
 
 app.listen(port, () => {
-  console.log(`[@review/events] Listen port ${port}`);
+  logs.events.log(`Listen port ${port}`);
 });
