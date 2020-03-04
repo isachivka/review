@@ -1,4 +1,5 @@
 import { PullRequests } from '@review/github-fetch/src/types/shared';
+import logs from '@review/logs';
 
 type Event = {
   type: string;
@@ -37,9 +38,9 @@ async function generateEvents(
   /**
    * Из массива результатов печатаем все ошибки, остальные возвращаем
    */
-  const events = generatorsResult.reduce((acc: Event[], result) => {
+  const events = generatorsResult.reduce((acc: Event[], result, generatorIndex) => {
     if (typeof result === 'string') {
-      console.warn(`[@review/events] generator error: ${result}`);
+      logs.events.warn(`Generator (${generators[generatorIndex]}) error: ${result}`);
       return acc;
     }
 
