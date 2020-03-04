@@ -12,7 +12,7 @@ export type GeneratorResult = Error | Event[];
 
 export type Generator = (prev: PullRequests, next: PullRequests) => Promise<GeneratorResult>;
 
-const fulfillOnReject = (promise: Promise<GeneratorResult>) =>
+const fulfillOnReject = (promise: Promise<GeneratorResult>): Promise<GeneratorResult> =>
   new Promise<GeneratorResult>((resolve) => {
     promise
       .then((data) => resolve(data))
@@ -23,7 +23,7 @@ async function generateEvents(
   generators: Generator[],
   prev: PullRequests,
   next: PullRequests
-) {
+): Promise<Event[]> {
   /**
    * Тут бы не помешал Promise.allSettled, но что есть, то есть. Поэтому все оборачиваем
    * в fulfillOnReject так, чтобы если промис зареджектился, он зафуллфилился
