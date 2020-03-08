@@ -2,8 +2,13 @@ import express from 'express';
 import { PullRequests } from '@review/github-fetch/src/types/shared';
 import doMongo from './mongo';
 import generateEvents from './generateEvents';
-import generators from './events';
 import logs from '@review/logs';
+
+import pullRequestCreated from './events/pullRequestCreated';
+
+const generators = [
+  pullRequestCreated,
+];
 
 const port = 3000;
 const app = express();
