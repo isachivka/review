@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "start": "node ./build",
+    "start": "node ./build/events/src",
     "dev": "yarn build && yarn start",
     "test": "yarn jest"
   },
