@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./build/github-fetch/src/index",
-    "dev": "yarn build && yarn start",
+    "dev": "rimraf ./build && yarn build && yarn start",
     "branches": "yarn build && node ./build/github-fetch/src/branches",
     "generate-types": "graphql-codegen --config codegen.yml"
   },
