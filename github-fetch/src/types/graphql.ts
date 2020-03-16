@@ -17449,6 +17449,37 @@ export type ViewerHovercardContext = HovercardContext & {
 };
 
 
+export type BranchesQueryVariables = {
+  owner: Scalars['String'],
+  repository: Scalars['String'],
+  after: Scalars['String']
+};
+
+
+export type BranchesQuery = (
+  { __typename?: 'Query' }
+  & { repository: Maybe<(
+    { __typename?: 'Repository' }
+    & { refs: Maybe<(
+      { __typename?: 'RefConnection' }
+      & { nodes: Maybe<Array<Maybe<(
+        { __typename?: 'Ref' }
+        & Pick<Ref, 'name'>
+        & { target: (
+          { __typename?: 'Commit' }
+          & { author: Maybe<(
+            { __typename?: 'GitActor' }
+            & Pick<GitActor, 'date' | 'email' | 'name'>
+          )> }
+        ) | { __typename?: 'Tree' } | { __typename?: 'Blob' } | { __typename?: 'Tag' } }
+      )>>>, pageInfo: (
+        { __typename?: 'PageInfo' }
+        & Pick<PageInfo, 'endCursor' | 'hasNextPage'>
+      ) }
+    )> }
+  )> }
+);
+
 export type PullRequestsQueryVariables = {
   owner: Scalars['String'],
   repository: Scalars['String']

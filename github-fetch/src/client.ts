@@ -12,5 +12,5 @@ export default new ApolloClient({
   },
 });
 
-export const owner = config.get('owner');
-export const repository = config.get('repository');
+export const owner = config.get('owner') as string;
+export const repository = config.get('repository') as string;
