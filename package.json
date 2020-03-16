@@ -14,7 +14,7 @@
     "events": "yarn workspace @review/events dev",
     "github-fetch": "yarn workspace @review/github-fetch dev",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "test": "yarn workspace @review/events test"
+    "test": "yarn jest"
   },
   "repository": "git@github.com:isachivka/review.git",
   "author": "isachivka <juicy.igor@gmail.com>",
@@ -22,6 +22,10 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^2.21.0",
     "@typescript-eslint/parser": "^2.21.0",
-    "eslint": "^6.8.0"
+    "@types/jest": "^25.1.4",
+    "eslint": "^6.8.0",
+    "ts-jest": "^25.2.1",
+    "jest": "^25.1.0",
+    "rimraf": "^3.0.2"
   }
 }
