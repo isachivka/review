@@ -82,6 +82,8 @@ function group(branches: MappedBranches) {
   return groupBy(branches, 'github');
 }
 
+const validateRegexp = /^develop|master|release\/\d+(\.\d+){1,2}|(feature|bugfix)(\/\d+(\.\d+){1,2})?\/(JSF|SNF)[^/]+$/;
+
 function markdownIt(authorsBranches: Record<string, MappedBranches>) {
   let markdown = '';
   Object.entries(authorsBranches).forEach(([author, branches]) => {
@@ -89,8 +91,13 @@ function markdownIt(authorsBranches: Record<string, MappedBranches>) {
 
 `;
     branches.forEach(branch => {
-      markdown += `${branch.branch}, age - ${branch.age.toFixed(1)} days
+      if (validateRegexp.test(branch.branch)) {
+        markdown += `${branch.branch}, age - ${branch.age.toFixed(1)} days
 `;
+      } else {
+        markdown += `🆘 (invalid name) ${branch.branch}, age - ${branch.age.toFixed(1)} days
+`;
+      }
     });
     markdown += `
 `;
