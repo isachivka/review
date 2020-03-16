@@ -15,6 +15,7 @@ cron.schedule('* * * * *', () => {
   client.query<PullRequestsQuery, PullRequestsQueryVariables>({
     query: getPullRequests,
     variables: { owner, repository },
+    fetchPolicy: 'no-cache',
   })
     .then(({ data }) => {
       if (data.repository && data.repository.pullRequests.nodes) {
