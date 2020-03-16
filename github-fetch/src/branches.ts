@@ -9,7 +9,13 @@ import { Branches } from './types/shared';
 import logs from '@review/logs';
 import { githubMap, slackMap } from './authorsMap';
 
-async function getPage(after: string) {
+type Page = {
+  nodes: Branches;
+  hasNextPage: boolean;
+  endCursor: string | null | undefined;
+};
+
+async function getPage(after: string): Promise<Page> {
   const page = await client.query<BranchesQuery, BranchesQueryVariables>({
     query: getBranches,
     variables: {
@@ -37,7 +43,7 @@ async function getPage(after: string) {
   };
 }
 
-async function getAllBranches() {
+async function getAllBranches(): Promise<Branches> {
   let after = '';
   const result: Branches = [];
   // eslint-disable-next-line no-constant-condition
@@ -78,13 +84,14 @@ function mapBranches(result: Branches): MappedBranches {
   }, []).sort((a,b) => {return b.age - a.age});
 }
 
-function group(branches: MappedBranches) {
+type GroupedBranches = Record<string, MappedBranches>;
+function group(branches: MappedBranches): GroupedBranches {
   return groupBy(branches, 'github');
 }
 
 const validateRegexp = /^develop|master|release\/\d+(\.\d+){1,2}|(feature|bugfix)(\/\d+(\.\d+){1,2})?\/(JSF|SNF)[^/]+$/;
 
-function markdownIt(authorsBranches: Record<string, MappedBranches>) {
+function markdownIt(authorsBranches: GroupedBranches): string {
   let markdown = '';
   Object.entries(authorsBranches).forEach(([author, branches]) => {
     markdown += `### ${author}: ${branches.length}
