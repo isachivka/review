@@ -7,7 +7,8 @@
   "workspaces": [
     "events",
     "github-fetch",
-    "logs"
+    "logs",
+    "ui"
   ],
   "scripts": {
     "mongodb": "docker run -p 27017:27017 -v `pwd`/mongodb/data:/data/db mongo",
