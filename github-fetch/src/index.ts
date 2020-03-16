@@ -4,7 +4,7 @@ import superagent from 'superagent';
 import config from 'config';
 import client, { owner, repository } from './client';
 import getPullRequests from './queries/getPullRequests';
-import { PullRequestsQuery } from './types/graphql';
+import { PullRequestsQuery, PullRequestsQueryVariables } from './types/graphql';
 import logs from '@review/logs';
 
 const putApi = `${config.get('eventsApi')}/put`;
@@ -12,7 +12,7 @@ const putApi = `${config.get('eventsApi')}/put`;
 logs.githubFetch.log('Successfully started')
 
 cron.schedule('* * * * *', () => {
-  client.query<PullRequestsQuery>({
+  client.query<PullRequestsQuery, PullRequestsQueryVariables>({
     query: getPullRequests,
     variables: { owner, repository },
   })
