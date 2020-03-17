@@ -1,6 +1,10 @@
 <script>
   import last from 'lodash/last';
   import { pullRequests } from './store';
+
+  $: {
+    console.log('PullRequests:', $pullRequests);
+  }
 </script>
 
 {#if $pullRequests}
@@ -14,7 +18,7 @@
           {/each}
         </td>
         <td>{pullRequest.title}</td>
-        <td><span class="specialSpan">{pullRequest.baseRefName} -> {pullRequest.headRefName}</span></td>
+        <td class="fixWidth">{pullRequest.baseRefName} -> {pullRequest.headRefName}</td>
       </tr>
     {/each}
   </table>
@@ -25,9 +29,8 @@
     margin: 0 auto;
     font-size: 18px;
   }
-  .specialSpan {
-    display: inline-block;
-    width: 300px;
+  .fixWidth {
+    max-width: 300px;
     white-space: nowrap;
     text-overflow: ellipsis;
     overflow: hidden;
