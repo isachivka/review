@@ -1,3 +1,6 @@
 **/build/**
 **/apollo.config.js
 **/types/graphql.ts
+ui/rollup.config.js
+ui/public/back
+ui/public/build
