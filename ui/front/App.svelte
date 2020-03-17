@@ -1,20 +1,11 @@
 <script>
   import last from 'lodash/last';
-
-  let pullRequests;
-
-  fetch('http://localhost:5001/list')
-    .then(response => response.json())
-    .then(result => pullRequests = result);
-
-  $: {
-    console.log(pullRequests)
-  }
+  import { pullRequests } from './store';
 </script>
 
-{#if pullRequests}
+{#if $pullRequests}
   <table class="table">
-    {#each pullRequests as pullRequest}
+    {#each $pullRequests as pullRequest}
       <tr>
         <td><a href={pullRequest.permalink} target="_blank">#{last(pullRequest.permalink.split('/'))}</a></td>
         <td>
