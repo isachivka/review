@@ -9,7 +9,7 @@ services:
   events:
     build:
       context: .
-      dockerfile: ./events.Dockerfile
+    entrypoint: "yarn events"
     container_name: "events"
     networks:
       - review-network
@@ -19,12 +19,36 @@ services:
   github-fetch:
     build:
       context: .
-      dockerfile: ./github-fetch.Dockerfile
+    entrypoint: "yarn github-fetch"
     container_name: "github-fetch"
     networks:
       - review-network
     depends_on:
       - events
+
+  bff:
+    build:
+      context: .
+    entrypoint: "yarn bff"
+    container_name: "bff"
+    ports:
+      - "5001:5001"
+    networks:
+      - review-network
+    depends_on:
+      - mongodb
+
+  front:
+    build:
+      context: .
+    entrypoint: "yarn front"
+    container_name: "front"
+    ports:
+      - "5000:5000"
+    networks:
+      - review-network
+    depends_on:
+      - bff
 
 networks:
   review-network:
