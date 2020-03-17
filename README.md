@@ -11,6 +11,8 @@
 2. Запустите mongodb - `yarn mongodb`
 3. Запустите @review/events - `yarn events`
 4. Запустите @review/github-fetch - `yarn github-fetch`
+4. Запустите @review/ui/front - `yarn front`
+4. Запустите @review/ui/back - `yarn bff`
 
 **Важен порядок**
 
