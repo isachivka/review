@@ -6,6 +6,9 @@ export default gql`
       pullRequests(first: 100, states: OPEN) {
         nodes {
           permalink
+          title
+          baseRefName
+          headRefName
           reviews(states: APPROVED, last: 10) {
             nodes {
               author {

@@ -17494,7 +17494,7 @@ export type PullRequestsQuery = (
       { __typename?: 'PullRequestConnection' }
       & { nodes: Maybe<Array<Maybe<(
         { __typename?: 'PullRequest' }
-        & Pick<PullRequest, 'permalink'>
+        & Pick<PullRequest, 'permalink' | 'title' | 'baseRefName' | 'headRefName'>
         & { reviews: Maybe<(
           { __typename?: 'PullRequestReviewConnection' }
           & { nodes: Maybe<Array<Maybe<(
