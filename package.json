@@ -14,6 +14,9 @@
     "mongodb": "docker run -p 27017:27017 -v `pwd`/mongodb/data:/data/db mongo",
     "events": "yarn workspace @review/events dev",
     "github-fetch": "yarn workspace @review/github-fetch dev",
+    "front": "yarn workspace @review/ui dev",
+    "bff": "yarn workspace @review/ui dev:back",
+
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "yarn jest"
   },
