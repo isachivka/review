@@ -1,6 +1,8 @@
 const modulesLocale = {
   events: '[@review/events]',
   gitHubFetch: '[@review/github-fetch]',
+  core: '[@review/core]',
+  ui: '[@review/ui]',
 };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -38,10 +40,14 @@ class ReviewConsole implements Logger {
 class Log {
   events: Logger;
   githubFetch: Logger;
+  core: Logger;
+  ui: Logger;
 
   constructor() {
     this.events = new ReviewConsole(modulesLocale.events);
+    this.ui = new ReviewConsole(modulesLocale.ui);
     this.githubFetch = new ReviewConsole(modulesLocale.gitHubFetch);
+    this.core = new ReviewConsole(modulesLocale.core);
   }
 }
 
