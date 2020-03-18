@@ -87,7 +87,7 @@ export function mapBranches(result: Branches): MappedBranches {
   }, []).sort((a,b) => {return b.age - a.age});
 }
 
-type GroupedBranches = Record<string, MappedBranches>;
+export type GroupedBranches = Record<string, MappedBranches>;
 export function group(branches: MappedBranches): GroupedBranches {
   return groupBy(branches, 'github');
 }
