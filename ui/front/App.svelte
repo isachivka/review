@@ -1,4 +1,3 @@
-<!-- App.svelte -->
 <script>
   import { Router, Link, Route } from "svelte-routing";
   import PullRequests from "./PullRequests.svelte";

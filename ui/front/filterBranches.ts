@@ -17,4 +17,28 @@ function mapBranches(branches: MappedBranches): (MappedBranch & { invalid?: bool
       return { ...branch, invalid: true };
     });
 }
+
+export function getMarkdownFromGroupedBranches(authorsBranches: Record<string, (MappedBranch & { invalid?: boolean })[]>): string {
+  let markdown = '';
+  Object.entries(authorsBranches).forEach(([author, branches]) => {
+    const mBranches = mapBranches(branches);
+    markdown += `### ${author}: ${mBranches.length}
+
+`;
+    mBranches.forEach(branch => {
+      if (isValid(branch)) {
+        markdown += `${branch.branch}, age - ${branch.age.toFixed(1)} days
+`;
+      } else {
+        markdown += `🆘 (invalid name) ${branch.branch}, age - ${branch.age.toFixed(1)} days
+`;
+      }
+    });
+    markdown += `
+`;
+  });
+  return markdown;
+}
+
 export default mapBranches;
+
