@@ -1,6 +1,6 @@
 import express from 'express';
 import { PullRequests } from '@review/github-fetch/src/types/shared';
-import doMongo from './mongo';
+import doMongo from '@review/core/doMongo';
 import generateEvents from './generateEvents';
 import logs from '@review/logs';
 
