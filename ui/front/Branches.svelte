@@ -1,14 +1,19 @@
 <script>
+  import groupBy from 'lodash/groupBy';
   import { branches } from './store';
+  import AuthorBranches from './AuthorBranches.svelte';
+
+  let groupedBranches = {};
 
   fetch('/branches')
     .then(response => response.json())
     .then(result => branches.set(result));
 
   $: {
-    console.log('Branches:', $branches);
+    groupedBranches = Object.values(groupBy($branches, 'github'));
   }
 </script>
 
-<h1>Branches 1</h1>
-<p>{JSON.stringify($branches)}</p>
+{#each groupedBranches as branchesByAuthor}
+  <AuthorBranches authorBranches={branchesByAuthor} />
+{/each}
