@@ -43,7 +43,7 @@ async function getPage(after: string): Promise<Page> {
   };
 }
 
-async function getAllBranches(): Promise<Branches> {
+export async function getAllBranches(): Promise<Branches> {
   let after = '';
   const result: Branches = [];
   // eslint-disable-next-line no-constant-condition
@@ -65,9 +65,9 @@ type MappedBranch = {
   github: string;
   slack: string;
 };
-type MappedBranches = MappedBranch[];
+export type MappedBranches = MappedBranch[];
 
-function mapBranches(result: Branches): MappedBranches {
+export function mapBranches(result: Branches): MappedBranches {
   const today = Date.now();
   return result.reduce((acc: MappedBranches, branch): MappedBranches => {
     if (!branch) return acc;
@@ -85,7 +85,7 @@ function mapBranches(result: Branches): MappedBranches {
 }
 
 type GroupedBranches = Record<string, MappedBranches>;
-function group(branches: MappedBranches): GroupedBranches {
+export function group(branches: MappedBranches): GroupedBranches {
   return groupBy(branches, 'github');
 }
 
@@ -112,11 +112,13 @@ function markdownIt(authorsBranches: GroupedBranches): string {
   return markdown;
 }
 
-getAllBranches()
-  .then(mapBranches)
-  .then(group)
-  .then(markdownIt)
-  .then((result) => {
-    logs.githubFetch.log(result);
-    return result;
-  });
+export default () => {
+  getAllBranches()
+    .then(mapBranches)
+    .then(group)
+    .then(markdownIt)
+    .then((result) => {
+      logs.githubFetch.log(result);
+      return result;
+    });
+}

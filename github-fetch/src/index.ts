@@ -6,11 +6,14 @@ import client, { owner, repository } from './client';
 import getPullRequests from './queries/getPullRequests';
 import { PullRequestsQuery, PullRequestsQueryVariables } from './types/graphql';
 import logs from '@review/logs';
+import { getAllBranches, mapBranches, MappedBranches } from './branches';
+import doMongo from '@review/core/doMongo';
 
 const putApi = `${config.get('eventsApi')}/put`;
 
-logs.githubFetch.log('Successfully started')
+logs.githubFetch.log('Successfully started');
 
+// Every minute
 cron.schedule('* * * * *', () => {
   client.query<PullRequestsQuery, PullRequestsQueryVariables>({
     query: getPullRequests,
@@ -32,5 +35,21 @@ cron.schedule('* * * * *', () => {
       } else {
         logs.githubFetch.error('Something wrong, response do not contains PullRequests');
       }
+    });
+});
+
+// Every ten minutes
+cron.schedule('*/10 * * * *', () => {
+  getAllBranches()
+    .then(mapBranches)
+    .then((data: MappedBranches) => {
+      doMongo(async (db, close) => {
+        const collection = db.collection('branches');
+        await collection.deleteMany({});
+        await collection.insertMany(data);
+        logs.githubFetch.log('Save branches success. Length:', data.length);
+
+        close();
+      });
     });
 });
