@@ -1,38 +1,19 @@
+<!-- App.svelte -->
 <script>
-  import last from 'lodash/last';
-  import { pullRequests } from './store';
+  import { Router, Link, Route } from "svelte-routing";
+  import PullRequests from "./PullRequests.svelte";
+  import Branches from "./Branches.svelte";
 
-  $: {
-    console.log('PullRequests:', $pullRequests);
-  }
+  export let url = "";
 </script>
 
-{#if $pullRequests}
-  <table class="table">
-    {#each $pullRequests as pullRequest}
-      <tr>
-        <td><a href={pullRequest.permalink} target="_blank">#{last(pullRequest.permalink.split('/'))}</a></td>
-        <td>
-          {#each pullRequest.reviews.nodes as review}
-            ✅
-          {/each}
-        </td>
-        <td>{pullRequest.title}</td>
-        <td class="fixWidth">{pullRequest.baseRefName} -> {pullRequest.headRefName}</td>
-      </tr>
-    {/each}
-  </table>
-{/if}
-
-<style>
-  .table {
-    margin: 0 auto;
-    font-size: 18px;
-  }
-  .fixWidth {
-    max-width: 300px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-  }
-</style>
+<Router url="{url}">
+  <nav>
+    <Link to="/">PullRequests</Link>
+    <Link to="/branch">Branches</Link>
+  </nav>
+  <div>
+    <Route path="/" component="{PullRequests}" />
+    <Route path="/branch" component="{Branches}" />
+  </div>
+</Router>
