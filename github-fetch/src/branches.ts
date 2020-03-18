@@ -1,12 +1,10 @@
 import 'cross-fetch/polyfill';
 import get from 'lodash/get';
-import groupBy from 'lodash/groupBy';
 import client, { owner, repository } from './client';
 import getBranches from './queries/getBranches';
 import { BranchesQuery, BranchesQueryVariables } from './types/graphql';
 import { Branches } from './types/shared';
 
-import logs from '@review/logs';
 import { githubMap, slackMap } from './authorsMap';
 
 type Page = {
@@ -85,43 +83,4 @@ export function mapBranches(result: Branches): MappedBranches {
         // ms / sec / min / hr = days
     }];
   }, []).sort((a,b) => {return b.age - a.age});
-}
-
-export type GroupedBranches = Record<string, MappedBranches>;
-export function group(branches: MappedBranches): GroupedBranches {
-  return groupBy(branches, 'github');
-}
-
-const validateRegexp = /^develop|master|release\/\d+(\.\d+){1,2}|(feature|bugfix)(\/\d+(\.\d+){1,2})?\/(JSF|SNF)[^/]+$/;
-
-function markdownIt(authorsBranches: GroupedBranches): string {
-  let markdown = '';
-  Object.entries(authorsBranches).forEach(([author, branches]) => {
-    markdown += `### ${author}: ${branches.length}
-
-`;
-    branches.forEach(branch => {
-      if (validateRegexp.test(branch.branch)) {
-        markdown += `${branch.branch}, age - ${branch.age.toFixed(1)} days
-`;
-      } else {
-        markdown += `🆘 (invalid name) ${branch.branch}, age - ${branch.age.toFixed(1)} days
-`;
-      }
-    });
-    markdown += `
-`;
-  });
-  return markdown;
-}
-
-export default () => {
-  getAllBranches()
-    .then(mapBranches)
-    .then(group)
-    .then(markdownIt)
-    .then((result) => {
-      logs.githubFetch.log(result);
-      return result;
-    });
 }
