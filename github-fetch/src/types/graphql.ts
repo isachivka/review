@@ -17469,7 +17469,7 @@ export type BranchesQuery = (
           { __typename?: 'Commit' }
           & { author: Maybe<(
             { __typename?: 'GitActor' }
-            & Pick<GitActor, 'date' | 'email' | 'name'>
+            & Pick<GitActor, 'avatarUrl' | 'date' | 'email' | 'name'>
           )> }
         ) | { __typename?: 'Tree' } | { __typename?: 'Blob' } | { __typename?: 'Tag' } }
       )>>>, pageInfo: (

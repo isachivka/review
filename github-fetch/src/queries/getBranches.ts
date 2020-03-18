@@ -9,6 +9,7 @@ export default gql`
           target {
             ... on Commit {
               author {
+                avatarUrl
                 date
                 email
                 name

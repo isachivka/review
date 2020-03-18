@@ -58,12 +58,13 @@ export async function getAllBranches(): Promise<Branches> {
   }
 }
 
-type MappedBranch = {
+export type MappedBranch = {
   branch: string;
   age: number;
   email: string;
   github: string;
   slack: string;
+  avatarUrl: string;
 };
 export type MappedBranches = MappedBranch[];
 
@@ -72,7 +73,9 @@ export function mapBranches(result: Branches): MappedBranches {
   return result.reduce((acc: MappedBranches, branch): MappedBranches => {
     if (!branch) return acc;
     const email = get(branch, 'target.author.email', '') as string;
+    const avatarUrl = get(branch, 'target.author.avatarUrl', '') as string;
     return [...acc, {
+      avatarUrl: avatarUrl,
       branch: branch.name,
       email,
       github: get(githubMap, email, undefined) || email,
