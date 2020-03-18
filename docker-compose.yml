@@ -26,18 +26,6 @@ services:
     depends_on:
       - events
 
-  bff:
-    build:
-      context: .
-    entrypoint: "yarn bff"
-    container_name: "bff"
-    ports:
-      - "5001:5001"
-    networks:
-      - review-network
-    depends_on:
-      - mongodb
-
   front:
     build:
       context: .
@@ -48,7 +36,7 @@ services:
     networks:
       - review-network
     depends_on:
-      - bff
+      - mongodb
 
 networks:
   review-network:

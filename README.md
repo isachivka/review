@@ -7,18 +7,20 @@
     127.0.0.1 events
     127.0.0.1 mongodb
     127.0.0.1 front
-    127.0.0.1 bff
     ```
 2. Сконфигурируйте [@review/github-fetch](github-fetch/README.md)
 2. Запустите mongodb - `yarn mongodb`
 3. Запустите @review/events - `yarn events`
 4. Запустите @review/github-fetch - `yarn github-fetch`
 5. Запустите @review/ui/front - `yarn front`
-6. Запустите @review/ui/back - `yarn bff`
+
+**Важен порядок**
 
 Для локального запуска: `docker-compose up`
 
-**Важен порядок**
+Если вы хотите вести разработку в одном или нескольких пакетах, но не хотите все запускать 
+отдельно - просто закомментируйте то, что разрабатываете в `docker-compose.yml` и запускайте 
+только это
 
 ---
 
