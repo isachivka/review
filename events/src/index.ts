@@ -19,19 +19,32 @@ app.put('/put', (request, response) => {
   response.status(200).send('Okay');
 
   doMongo(async (db, close) => {
-    const collection = db.collection('prs');
-    const prevPullRequests = await collection.find({}).toArray();
-    await collection.deleteMany({});
-    await collection.insertMany(pullRequests);
+    try {
+      const pullRequestsCollection = db.collection('prs');
+      const prevPullRequests = await pullRequestsCollection.find({}).toArray();
+      await pullRequestsCollection.deleteMany({});
+      await pullRequestsCollection.insertMany(pullRequests);
+
+      // Generate event if we have data for compare
+      // and save it to mongodb
+      if (prevPullRequests.length > 0) {
+        const events = await generateEvents(
+          generators,
+          prevPullRequests,
+          pullRequests,
+        );
+
+        const eventsCollection = db.collection('events');
+        if (events.length > 0) {
+          await eventsCollection.insertMany(events);
+          logs.events.log('Events written to collection:', events);
+        }
+      }
+    } catch (e) {
+      logs.events.error(e);
+    }
+
     close();
-
-    const events = await generateEvents(
-      generators,
-      prevPullRequests,
-      pullRequests,
-    );
-
-    logs.events.log(events);
   });
 });
 
