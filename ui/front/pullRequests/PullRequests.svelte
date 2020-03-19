@@ -1,6 +1,6 @@
 <script>
   import last from 'lodash/last';
-  import { pullRequests } from './store';
+  import { pullRequests } from '../store';
 
   fetch('/prs')
     .then(response => response.json())
@@ -23,7 +23,7 @@
         <td><a href={pullRequest.permalink} target="_blank">#{last(pullRequest.permalink.split('/'))}</a></td>
         <td>
           <span class={pullRequest.reviews.nodes.length > 0 ? 'review approved': 'review'}>
-            <span>{pullRequest.reviews.nodes.length}</span>
+            <span>x{pullRequest.reviews.nodes.length}</span>
           </span>
         </td>
       </tr>
@@ -32,17 +32,37 @@
 {/if}
 
 <style>
+  .review, .review > * {
+    box-sizing: border-box;
+  }
   .review {
-
+    background: #616567;
+    opacity: 0.5;
+    border-radius: 100px;
+    font-size: 10px;
+    padding: 2px 2px 2px 7px;
+    height: 22px;
+    line-height: 17px;
+    /*line-height: 20px;*/
+    display: inline-block;
+  }
+  .review:before {
+    content: 'Approved ';
   }
 
 
   .review.approved {
-
+    background: #a90ea2;
+    opacity: 1;
   }
 
   .review span {
-
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 100%;
+    height: 18px;
+    width: 18px;
+    text-align: center;
+    display: inline-block;
   }
 
   .review.approved span {

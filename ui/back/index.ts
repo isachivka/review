@@ -30,6 +30,27 @@ app.get('/branches', (_, response) => {
   });
 });
 
+app.get('/events', (_, response) => {
+  doMongo(async (db, close) => {
+    const collection = db.collection('events');
+    const events = await collection.find({}).toArray();
+    response.status(200);
+    response.send(events);
+    close();
+  });
+});
+
+app.put('/events/clean', (_, response) => {
+  doMongo(async (db, close) => {
+    const collection = db.collection('events');
+    await collection.deleteMany({});
+    const events = await collection.find({}).toArray();
+    response.status(200);
+    response.send(events);
+    close();
+  });
+});
+
 app.get('*', function(_, res) {
   res.sendFile(path.join(__dirname, '../../../index.html'));
 });

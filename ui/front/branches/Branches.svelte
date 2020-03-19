@@ -1,6 +1,6 @@
 <script>
   import groupBy from 'lodash/groupBy';
-  import { branches } from './store';
+  import { branches } from '../store';
   import AuthorBranches from './AuthorBranches.svelte';
   import { getMarkdownFromGroupedBranches } from './filterBranches';
 
