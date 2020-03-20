@@ -18,7 +18,7 @@
 <div class="authorBranches">
   <a href="https://github.com/{github.substr(1)}" target="_blank">
     <img class="avatar" src={avatarUrl} alt="" />
-    <span>{github}</span>
+    <span>{github} ({branches.length})</span>
   </a>
   <div class="branches">
     {#each branches as branch}
