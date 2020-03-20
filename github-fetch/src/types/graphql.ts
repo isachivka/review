@@ -17494,11 +17494,12 @@ export type PullRequestsQuery = (
       { __typename?: 'PullRequestConnection' }
       & { nodes: Maybe<Array<Maybe<(
         { __typename?: 'PullRequest' }
-        & Pick<PullRequest, 'permalink' | 'title' | 'baseRefName' | 'headRefName'>
+        & Pick<PullRequest, 'permalink' | 'createdAt' | 'updatedAt' | 'title' | 'baseRefName' | 'headRefName'>
         & { reviews: Maybe<(
           { __typename?: 'PullRequestReviewConnection' }
           & { nodes: Maybe<Array<Maybe<(
             { __typename?: 'PullRequestReview' }
+            & Pick<PullRequestReview, 'state'>
             & { author: Maybe<(
               { __typename?: 'EnterpriseUserAccount' }
               & Pick<EnterpriseUserAccount, 'login'>
