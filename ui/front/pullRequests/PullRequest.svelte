@@ -7,20 +7,25 @@
 
   export let pullRequest;
 
-  let prNumber;
-  let reviews;
+  let prNumber,
+    reviews,
+    age;
 
   $: reviews = groupBy(pullRequest.reviews.nodes, 'state');
   $: console.log(reviews);
 
   $: prNumber = last(pullRequest.permalink.split('/'));
+  $: age = parseInt(
+    (Date.now() - new Date(pullRequest.createdAt)) / 1000 / 60 / 60 / 24
+  );
 </script>
 
 <tr>
   <td>
     <a href={pullRequest.permalink} target="_blank">#{prNumber}</a>
   </td>
-  <td class="second">{format(new Date(pullRequest.createdAt), 'dd MMM')}</td>
+<!--  <td class="second">{format(new Date(pullRequest.createdAt), 'dd MMM')}</td>-->
+  <td class="second">{age} days</td>
   <td class="fixWidth">
     <span class="from">{pullRequest.headRefName}</span>
     <span class="to">{pullRequest.baseRefName}</span>
