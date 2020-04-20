@@ -5,12 +5,14 @@ import generateEvents from './generateEvents';
 import logs from '@review/logs';
 
 import pullRequestCreated from './events/pullRequestCreated';
+import pullRequestApproved from './events/pullRequestApproved';
 
 const generators = [
   pullRequestCreated,
+  pullRequestApproved,
 ];
 
-const port = 3000;
+const port = 4000;
 const app = express();
 app.use(express.json());
 

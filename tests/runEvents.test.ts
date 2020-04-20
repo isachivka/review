@@ -18,7 +18,7 @@ describe.skip('events integration run test', () => {
 
       child.stdout.on('data', (chunk) => {
         console.log(chunk.toString());
-        if (chunk.toString() === '[@review/events] Listen port 3000\n') {
+        if (chunk.toString() === '[@review/events] Listen port 4000\n') {
           child.kill('SIGKILL');
           resolve('ok');
         }

@@ -19,7 +19,7 @@
     "front-dev": "yarn workspace @review/ui dev & yarn workspace @review/ui dev:back",
 
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "test": "yarn jest"
+    "test": "yarn jest --watch"
   },
   "repository": "git@github.com:isachivka/review.git",
   "author": "isachivka <juicy.igor@gmail.com>",

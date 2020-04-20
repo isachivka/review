@@ -1,21 +1,12 @@
 import pullRequestCreated from '../pullRequestCreated';
+import { pullRequestMock } from './pullRequestMock';
 
 describe('PullRequestCreated events generator', () => {
   it('should detect pullRequest creating', (done) => {
-    const pullRequest = {
-      permalink: '123',
-      title: '',
-      baseRefName: '',
-      headRefName: '',
-      createdAt: '',
-      updatedAt: '',
-      reviews: { nodes: [] },
-    };
-
-    pullRequestCreated([], [pullRequest])
+    pullRequestCreated([], [pullRequestMock])
       .then(events => {
         expect(events).toEqual(
-          [{ type: '[@pullRequestCreated]', data: { pullRequest } }],
+          [{ type: '[@pullRequestCreated]', data: { pullRequest: pullRequestMock } }],
         );
         done();
       });

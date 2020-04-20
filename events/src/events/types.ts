@@ -2,6 +2,7 @@ import { PullRequests } from '@review/github-fetch/src/types/shared';
 
 export enum eventsTypes {
   pullRequestCreated = '[@pullRequestCreated]',
+  pullRequestApproved = '[@pullRequestApproved]',
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -16,7 +17,17 @@ export interface PullRequestCreatedEvent {
   };
 }
 
-export type AnyEvent = PullRequestCreatedEvent;
+export interface PullRequestApprovedEvent {
+  type: eventsTypes.pullRequestApproved;
+  data: {
+    pullRequest: PullRequest;
+    by: string;
+  };
+}
+
+export type AnyEvent =
+  PullRequestCreatedEvent |
+  PullRequestApprovedEvent;
 
 export type Error = string;
 
