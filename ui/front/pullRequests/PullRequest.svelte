@@ -4,12 +4,12 @@
   import groupBy from 'lodash/groupBy';
   import Badge from './Badge.svelte';
 
-
   export let pullRequest;
 
   let prNumber,
     reviews,
-    age;
+    age,
+    snf;
 
   $: reviews = groupBy(pullRequest.reviews.nodes, 'state');
   $: console.log(reviews);
@@ -18,13 +18,13 @@
   $: age = parseInt(
     (Date.now() - new Date(pullRequest.createdAt)) / 1000 / 60 / 60 / 24
   );
+  $: snf = pullRequest.headRefName.toUpperCase().indexOf('SNF') !== -1;
 </script>
 
-<tr>
+<tr class={snf ? 'passive' : ''}>
   <td>
     <a href={pullRequest.permalink} target="_blank">#{prNumber}</a>
   </td>
-<!--  <td class="second">{format(new Date(pullRequest.createdAt), 'dd MMM')}</td>-->
   <td class="second">{age} days</td>
   <td class="fixWidth">
     <span class="from">{pullRequest.headRefName}</span>
@@ -36,6 +36,9 @@
 </tr>
 
 <style>
+  .passive {
+    opacity: 0.3;
+  }
   .second {
     padding: 0 10px;
   }
