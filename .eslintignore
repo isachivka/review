@@ -4,3 +4,4 @@
 ui/rollup.config.js
 ui/public/back
 ui/public/build
+node_modules
