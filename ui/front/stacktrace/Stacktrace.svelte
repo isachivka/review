@@ -1,6 +1,7 @@
 <script>
   import StackTraceGPS from 'stacktrace-gps';
   import { stacktrace } from '../store';
+  import Line from './Line.svelte';
 
   let sourceStackTrace;
   let error;
@@ -41,11 +42,11 @@
     <textarea class="{error ? 'error' : ''}" bind:value={sourceStackTrace} />
     <button on:click={handleClick}>Decrypt</button>
   </div>
-  <div class="stacktrace">
+  <ol class="stacktrace">
     {#each $stacktrace as line}
-      {line}<br />
+      <Line line={line} />
     {/each}
-  </div>
+  </ol>
 </div>
 
 <style>
