@@ -61,35 +61,4 @@
     align-items: center;
     margin-bottom: 20px;
   }
-  textarea {
-    flex-grow: 1;
-    background: none;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    resize: none;
-    color: #c7c7c7;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 0 10px 0 0;
-  }
-  textarea.error {
-    border: 1px solid rgba(255, 100, 100, 0.5);
-  }
-  textarea:focus {
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    outline: none;
-  }
-  textarea.error:focus {
-    border: 1px solid rgba(255, 100, 100, 0.8);
-  }
-  button {
-    color: #fff;
-    border-radius: 100px;
-    font-size: 10px;
-    padding: 2px 10px;
-    height: 22px;
-    line-height: 17px;
-    display: inline-block;
-    background: #186419;
-    opacity: 1;
-  }
 </style>

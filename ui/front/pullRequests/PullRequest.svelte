@@ -1,4 +1,6 @@
 <script>
+  export let hide;
+
   import { format } from 'date-fns';
   import last from 'lodash/last';
   import groupBy from 'lodash/groupBy';
@@ -12,16 +14,17 @@
     snf;
 
   $: reviews = groupBy(pullRequest.reviews.nodes, 'state');
-  $: console.log(reviews);
 
   $: prNumber = last(pullRequest.permalink.split('/'));
   $: age = parseInt(
     (Date.now() - new Date(pullRequest.createdAt)) / 1000 / 60 / 60 / 24
   );
-  $: snf = pullRequest.headRefName.toUpperCase().indexOf('SNF') !== -1;
 </script>
 
-<tr class={snf ? 'passive' : ''}>
+<tr
+  class:passive="{pullRequest.hide}"
+  class:hide={$hide}
+>
   <td>
     <a href={pullRequest.permalink} target="_blank">#{prNumber}</a>
   </td>
@@ -38,6 +41,9 @@
 <style>
   .passive {
     opacity: 0.3;
+  }
+  .passive.hide {
+    display: none;
   }
   .second {
     padding: 0 10px;

@@ -46,15 +46,6 @@
   }
   .button {
     position: absolute;
-    right: 50px ;
-    background: #4cdfff;
-    display: block;
-    padding: 9px 10px 11px;
-    border-radius: 10px;
-    box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
-  }
-
-  .button:hover {
-    background: #3cc5e4;
+    right: 0px;
   }
 </style>
