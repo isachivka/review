@@ -11,6 +11,15 @@ export default gql`
           title
           baseRefName
           headRefName
+          commits(last: 1) {
+            nodes {
+              commit {
+                status {
+                  state
+                }  
+              }
+            }
+          }
           reviews(last: 10) {
             nodes {
               state

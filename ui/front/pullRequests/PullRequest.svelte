@@ -1,7 +1,6 @@
 <script>
   export let hide;
 
-  import { format } from 'date-fns';
   import last from 'lodash/last';
   import groupBy from 'lodash/groupBy';
   import Badge from './Badge.svelte';
@@ -11,10 +10,11 @@
   let prNumber,
     reviews,
     age,
-    snf;
+    ciStatus;
 
   $: reviews = groupBy(pullRequest.reviews.nodes, 'state');
 
+  $: ciStatus = pullRequest.commits.nodes[0].commit.status.state;
   $: prNumber = last(pullRequest.permalink.split('/'));
   $: age = parseInt(
     (Date.now() - new Date(pullRequest.createdAt)) / 1000 / 60 / 60 / 24
@@ -36,6 +36,7 @@
   </td>
   <td><Badge value={reviews.APPROVED} type="approve" /></td>
   <td><Badge value={reviews.CHANGES_REQUESTED} type="change" /></td>
+  <td><Badge value={ciStatus} type="ci" /></td>
 </tr>
 
 <style>

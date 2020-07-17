@@ -10506,7 +10506,7 @@ enum LabelOrderField {
   CREATED_AT
 
   """
-  Order labels by name 
+  Order labels by name
   """
   NAME
 }
