@@ -490,7 +490,7 @@ export type Blame = {
 /** Represents a range of information from a Git blame. */
 export type BlameRange = {
    __typename?: 'BlameRange',
-  /** 
+  /**
  * Identifies the recency of the change, from 1 (new) to 10 (old). This is
    * calculated as a 2-quantile and determines the length of distance between the
    * median age of all the changes in the file and the recency of the current
@@ -721,7 +721,7 @@ export type ChangeUserStatusInput = {
   limitedAvailability?: Maybe<Scalars['Boolean']>,
   /** A short description of your current status. */
   message?: Maybe<Scalars['String']>,
-  /** 
+  /**
  * The ID of the organization whose members will be allowed to see the status. If
    * omitted, the status will be publicly visible.
  */
@@ -1049,7 +1049,7 @@ export type Commit = GitObject & Node & Subscribable & UniformResourceLocatable 
   signature?: Maybe<GitSignature>,
   /** Status information for this commit */
   status?: Maybe<Status>,
-  /** 
+  /**
  * Returns a URL to download a tarball archive for a repository.
    * Note: For private repositories, these links are temporary and expire after five minutes.
  */
@@ -1066,7 +1066,7 @@ export type Commit = GitObject & Node & Subscribable & UniformResourceLocatable 
   viewerCanSubscribe: Scalars['Boolean'],
   /** Identifies if the viewer is watching, not watching, or ignoring the subscribable entity. */
   viewerSubscription?: Maybe<SubscriptionState>,
-  /** 
+  /**
  * Returns a URL to download a zipball archive for a repository.
    * Note: For private repositories, these links are temporary and expire after five minutes.
  */
@@ -1135,7 +1135,7 @@ export type CommitParentsArgs = {
 export type CommitAuthor = {
   /** Email addresses to filter by. Commits authored by any of the specified email addresses will be returned. */
   emails?: Maybe<Array<Scalars['String']>>,
-  /** 
+  /**
  * ID of a User to filter by. If non-null, only commits authored by this user
    * will be returned. This field takes precedence over emails.
  */
@@ -1367,7 +1367,7 @@ export type ConnectedEvent = Node & {
 
 /** Represents a contribution a user made on GitHub, such as opening an issue. */
 export type Contribution = {
-  /** 
+  /**
  * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
@@ -1437,9 +1437,9 @@ export type ContributionCalendarWeek = {
 export type ContributionOrder = {
   /** The ordering direction. */
   direction: OrderDirection,
-  /** 
+  /**
  * The field by which to order contributions.
-   * 
+   *
    * **Upcoming Change on 2019-10-01 UTC**
    * **Description:** `field` will be removed. Only one order field is supported.
    * **Reason:** `field` will be removed.
@@ -1464,28 +1464,28 @@ export type ContributionsCollection = {
   contributionYears: Array<Scalars['Int']>,
   /** Determine if this collection's time span ends in the current month. */
   doesEndInCurrentMonth: Scalars['Boolean'],
-  /** 
+  /**
  * The date of the first restricted contribution the user made in this time
    * period. Can only be non-null when the user has enabled private contribution counts.
  */
   earliestRestrictedContributionDate?: Maybe<Scalars['Date']>,
   /** The ending date and time of this collection. */
   endedAt: Scalars['DateTime'],
-  /** 
+  /**
  * The first issue the user opened on GitHub. This will be null if that issue was
    * opened outside the collection's time range and ignoreTimeRange is false. If
    * the issue is not visible but the user has opted to show private contributions,
    * a RestrictedContribution will be returned.
  */
   firstIssueContribution?: Maybe<CreatedIssueOrRestrictedContribution>,
-  /** 
+  /**
  * The first pull request the user opened on GitHub. This will be null if that
    * pull request was opened outside the collection's time range and
    * ignoreTimeRange is not true. If the pull request is not visible but the user
    * has opted to show private contributions, a RestrictedContribution will be returned.
  */
   firstPullRequestContribution?: Maybe<CreatedPullRequestOrRestrictedContribution>,
-  /** 
+  /**
  * The first repository the user created on GitHub. This will be null if that
    * first repository was created outside the collection's time range and
    * ignoreTimeRange is false. If the repository is not visible, then a
@@ -1496,7 +1496,7 @@ export type ContributionsCollection = {
   hasActivityInThePast: Scalars['Boolean'],
   /** Determine if there are any contributions in this collection. */
   hasAnyContributions: Scalars['Boolean'],
-  /** 
+  /**
  * Determine if the user made any contributions in this time frame whose details
    * are not visible because they were made in a private repository. Can only be
    * true if the user enabled private contribution counts.
@@ -1508,32 +1508,32 @@ export type ContributionsCollection = {
   issueContributions: CreatedIssueContributionConnection,
   /** Issue contributions made by the user, grouped by repository. */
   issueContributionsByRepository: Array<IssueContributionsByRepository>,
-  /** 
+  /**
  * When the user signed up for GitHub. This will be null if that sign up date
    * falls outside the collection's time range and ignoreTimeRange is false.
  */
   joinedGitHubContribution?: Maybe<JoinedGitHubContribution>,
-  /** 
+  /**
  * The date of the most recent restricted contribution the user made in this time
    * period. Can only be non-null when the user has enabled private contribution counts.
  */
   latestRestrictedContributionDate?: Maybe<Scalars['Date']>,
-  /** 
+  /**
  * When this collection's time range does not include any activity from the user, use this
    * to get a different collection from an earlier time range that does have activity.
  */
   mostRecentCollectionWithActivity?: Maybe<ContributionsCollection>,
-  /** 
+  /**
  * Returns a different contributions collection from an earlier time range than this one
    * that does not have any contributions.
  */
   mostRecentCollectionWithoutActivity?: Maybe<ContributionsCollection>,
-  /** 
+  /**
  * The issue the user opened on GitHub that received the most comments in the specified
    * time frame.
  */
   popularIssueContribution?: Maybe<CreatedIssueContribution>,
-  /** 
+  /**
  * The pull request the user opened on GitHub that received the most comments in the
    * specified time frame.
  */
@@ -1548,7 +1548,7 @@ export type ContributionsCollection = {
   pullRequestReviewContributionsByRepository: Array<PullRequestReviewContributionsByRepository>,
   /** A list of repositories owned by the user that the user created in this time range. */
   repositoryContributions: CreatedRepositoryContributionConnection,
-  /** 
+  /**
  * A count of contributions made by the user that the viewer cannot access. Only
    * non-zero when the user has chosen to share their private contribution counts.
  */
@@ -1769,7 +1769,7 @@ export type CreatedCommitContribution = Contribution & {
    __typename?: 'CreatedCommitContribution',
   /** How many commits were made on this day to this repository by the user. */
   commitCount: Scalars['Int'],
-  /** 
+  /**
  * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
@@ -1812,7 +1812,7 @@ export type CreatedCommitContributionEdge = {
 /** Represents the contribution a user made on GitHub by opening an issue. */
 export type CreatedIssueContribution = Contribution & {
    __typename?: 'CreatedIssueContribution',
-  /** 
+  /**
  * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
@@ -1858,7 +1858,7 @@ export type CreatedIssueOrRestrictedContribution = CreatedIssueContribution | Re
 /** Represents the contribution a user made on GitHub by opening a pull request. */
 export type CreatedPullRequestContribution = Contribution & {
    __typename?: 'CreatedPullRequestContribution',
-  /** 
+  /**
  * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
@@ -1904,7 +1904,7 @@ export type CreatedPullRequestOrRestrictedContribution = CreatedPullRequestContr
 /** Represents the contribution a user made by leaving a review on a pull request. */
 export type CreatedPullRequestReviewContribution = Contribution & {
    __typename?: 'CreatedPullRequestReviewContribution',
-  /** 
+  /**
  * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
@@ -1951,7 +1951,7 @@ export type CreatedPullRequestReviewContributionEdge = {
 /** Represents the contribution a user made on GitHub by creating a repository. */
 export type CreatedRepositoryContribution = Contribution & {
    __typename?: 'CreatedRepositoryContribution',
-  /** 
+  /**
  * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
@@ -2077,7 +2077,7 @@ export type CreateProjectPayload = {
 
 /** Autogenerated input type of CreatePullRequest */
 export type CreatePullRequestInput = {
-  /** 
+  /**
  * The name of the branch you want your changes pulled into. This should be an existing branch
    * on the current repository. You cannot update the base branch on a pull request to point
    * to another repository.
@@ -2087,7 +2087,7 @@ export type CreatePullRequestInput = {
   body?: Maybe<Scalars['String']>,
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>,
-  /** 
+  /**
  * The name of the branch where your changes are implemented. For cross-repository pull requests
    * in the same network, namespace `head_ref_name` with a user like this: `username:branch`.
  */
@@ -2146,12 +2146,12 @@ export type CreateRepositoryInput = {
   name: Scalars['String'],
   /** The ID of the owner for the new repository. */
   ownerId?: Maybe<Scalars['ID']>,
-  /** 
+  /**
  * When an organization is specified as the owner, this ID identifies the team
    * that should be granted access to the new repository.
  */
   teamId?: Maybe<Scalars['ID']>,
-  /** 
+  /**
  * Whether this repository should be marked as a template such that anyone who
    * can access it can create new repositories with the same files and directory structure.
  */
@@ -2194,7 +2194,7 @@ export type CreateTeamDiscussionInput = {
   body: Scalars['String'],
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>,
-  /** 
+  /**
  * If true, restricts the visiblity of this discussion to team members and
    * organization admins. If false or not specified, allows any organization member
    * to view this discussion.
@@ -3190,7 +3190,7 @@ export type EnterpriseOwnerInfo = {
   isUpdatingDefaultRepositoryPermission: Scalars['Boolean'],
   /** Whether the two-factor authentication requirement is currently being enforced. */
   isUpdatingTwoFactorRequirement: Scalars['Boolean'],
-  /** 
+  /**
  * The setting value for whether organization members with admin permissions on a
    * repository can change repository visibility.
  */
@@ -4382,7 +4382,7 @@ export type GitSignature = {
   signature: Scalars['String'],
   /** GitHub user corresponding to the email signing this commit. */
   signer?: Maybe<User>,
-  /** 
+  /**
  * The state of this signature. `VALID` if signature is valid and verified by
    * GitHub, otherwise represents reason why signature is considered invalid.
  */
@@ -4446,7 +4446,7 @@ export type GpgSignature = GitSignature & {
   signature: Scalars['String'],
   /** GitHub user corresponding to the email signing this commit. */
   signer?: Maybe<User>,
-  /** 
+  /**
  * The state of this signature. `VALID` if signature is valid and verified by
    * GitHub, otherwise represents reason why signature is considered invalid.
  */
@@ -4767,7 +4767,7 @@ export type IssueComment = Comment & Deletable & Node & Reactable & RepositoryNo
   minimizedReason?: Maybe<Scalars['String']>,
   /** Identifies when the comment was published at. */
   publishedAt?: Maybe<Scalars['DateTime']>,
-  /** 
+  /**
  * Returns the pull request associated with the comment, if this comment was made on a
    * pull request.
  */
@@ -4885,7 +4885,7 @@ export type IssueEdge = {
 
 /** Ways in which to filter lists of issues. */
 export type IssueFilters = {
-  /** 
+  /**
  * List issues assigned to given name. Pass in `null` for issues with no assigned
    * user, and `*` for issues assigned to any user.
  */
@@ -4896,7 +4896,7 @@ export type IssueFilters = {
   labels?: Maybe<Array<Scalars['String']>>,
   /** List issues where the given name is mentioned in the issue. */
   mentioned?: Maybe<Scalars['String']>,
-  /** 
+  /**
  * List issues by given milestone argument. If an string representation of an
    * integer is passed, it should refer to a milestone by its number field. Pass in
    * `null` for issues with no milestone, and `*` for issues that are assigned to any milestone.
@@ -5062,7 +5062,7 @@ export enum IssueTimelineItemsItemType {
 /** Represents a user signing up for a GitHub account. */
 export type JoinedGitHubContribution = Contribution & {
    __typename?: 'JoinedGitHubContribution',
-  /** 
+  /**
  * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
@@ -5472,7 +5472,7 @@ export type MarketplaceListing = Node & {
   isArchived: Scalars['Boolean'],
   /** Whether this listing has been removed from the Marketplace. */
   isDelisted: Scalars['Boolean'],
-  /** 
+  /**
  * Whether this listing is still an editable draft that has not been submitted
    * for review and is not publicly visible in the Marketplace.
  */
@@ -5521,7 +5521,7 @@ export type MarketplaceListing = Node & {
   statusUrl?: Maybe<Scalars['URI']>,
   /** An email address for support for this listing's app. */
   supportEmail?: Maybe<Scalars['String']>,
-  /** 
+  /**
  * Either a URL or an email address for support for this listing's app, may
    * return an empty string for listings that do not require a support URL.
  */
@@ -5538,31 +5538,31 @@ export type MarketplaceListing = Node & {
   viewerCanDelist: Scalars['Boolean'],
   /** Can the current viewer edit this Marketplace listing. */
   viewerCanEdit: Scalars['Boolean'],
-  /** 
+  /**
  * Can the current viewer edit the primary and secondary category of this
    * Marketplace listing.
  */
   viewerCanEditCategories: Scalars['Boolean'],
   /** Can the current viewer edit the plans for this Marketplace listing. */
   viewerCanEditPlans: Scalars['Boolean'],
-  /** 
+  /**
  * Can the current viewer return this Marketplace listing to draft state
    * so it becomes editable again.
  */
   viewerCanRedraft: Scalars['Boolean'],
-  /** 
+  /**
  * Can the current viewer reject this Marketplace listing by returning it to
    * an editable draft state or rejecting it entirely.
  */
   viewerCanReject: Scalars['Boolean'],
-  /** 
+  /**
  * Can the current viewer request this listing be reviewed for display in
    * the Marketplace as verified.
  */
   viewerCanRequestApproval: Scalars['Boolean'],
   /** Indicates whether the current user has an active subscription to this Marketplace listing. */
   viewerHasPurchased: Scalars['Boolean'],
-  /** 
+  /**
  * Indicates if the current user has purchased a subscription to this Marketplace listing
    * for all of the organizations the user owns.
  */
@@ -7080,7 +7080,7 @@ export type Organization = Actor & MemberStatusable & Node & ProfileOwner & Proj
   id: Scalars['ID'],
   /** Whether the organization has verified its profile email and website. */
   isVerified: Scalars['Boolean'],
-  /** 
+  /**
  * Showcases a selection of repositories and gists that the profile owner has
    * either curated or that have been selected automatically based on popularity.
  */
@@ -7127,7 +7127,7 @@ export type Organization = Actor & MemberStatusable & Node & ProfileOwner & Proj
   repositories: RepositoryConnection,
   /** Find Repository. */
   repository?: Maybe<Repository>,
-  /** 
+  /**
  * When true the organization requires all members, billing managers, and outside
    * collaborators to enable two-factor authentication.
  */
@@ -8387,7 +8387,7 @@ export type OrgRemoveMemberAuditEntry = AuditEntry & Node & OrganizationAuditEnt
 
 /** The type of membership a user has with an Organization. */
 export enum OrgRemoveMemberAuditEntryMembershipType {
-  /** 
+  /**
  * Organization administrators have full access and can change several settings,
    * including the names of repositories that belong to the Organization and Owners
    * team membership. In addition, organization admins can delete the organization
@@ -8398,13 +8398,13 @@ export enum OrgRemoveMemberAuditEntryMembershipType {
   BillingManager = 'BILLING_MANAGER',
   /** A direct member is a user that is a member of the Organization. */
   DirectMember = 'DIRECT_MEMBER',
-  /** 
+  /**
  * An outside collaborator is a person who isn't explicitly a member of the
    * Organization, but who has Read, Write, or Admin permissions to one or more
    * repositories in the organization.
  */
   OutsideCollaborator = 'OUTSIDE_COLLABORATOR',
-  /** 
+  /**
  * An unaffiliated collaborator is a person who is not a member of the
    * Organization and does not have access to any repositories in the Organization.
  */
@@ -8469,13 +8469,13 @@ export type OrgRemoveOutsideCollaboratorAuditEntry = AuditEntry & Node & Organiz
 export enum OrgRemoveOutsideCollaboratorAuditEntryMembershipType {
   /** A billing manager is a user who manages the billing settings for the Organization, such as updating payment information. */
   BillingManager = 'BILLING_MANAGER',
-  /** 
+  /**
  * An outside collaborator is a person who isn't explicitly a member of the
    * Organization, but who has Read, Write, or Admin permissions to one or more
    * repositories in the organization.
  */
   OutsideCollaborator = 'OUTSIDE_COLLABORATOR',
-  /** 
+  /**
  * An unaffiliated collaborator is a person who is not a member of the
    * Organization and does not have access to any repositories in the organization.
  */
@@ -9029,7 +9029,7 @@ export type PrivateRepositoryForkingEnableAuditEntry = AuditEntry & EnterpriseAu
   userUrl?: Maybe<Scalars['URI']>,
 };
 
-/** 
+/**
  * A curatable list of repositories relating to a repository owner, which defaults
  * to showing the most popular repositories they own.
  */
@@ -9037,7 +9037,7 @@ export type ProfileItemShowcase = {
    __typename?: 'ProfileItemShowcase',
   /** Whether or not the owner has pinned any repositories or gists. */
   hasPinnedItems: Scalars['Boolean'],
-  /** 
+  /**
  * The repositories and gists in the showcase. If the profile owner has any
    * pinned items, those will be returned. Otherwise, the profile owner's popular
    * repositories will be returned.
@@ -9046,7 +9046,7 @@ export type ProfileItemShowcase = {
 };
 
 
-/** 
+/**
  * A curatable list of repositories relating to a repository owner, which defaults
  * to showing the most popular repositories they own.
  */
@@ -9064,7 +9064,7 @@ export type ProfileOwner = {
   /** The public profile email. */
   email?: Maybe<Scalars['String']>,
   id: Scalars['ID'],
-  /** 
+  /**
  * Showcases a selection of repositories and gists that the profile owner has
    * either curated or that have been selected automatically based on popularity.
  */
@@ -9175,7 +9175,7 @@ export type ProjectPendingCardsArgs = {
 /** A card in a project. */
 export type ProjectCard = Node & {
    __typename?: 'ProjectCard',
-  /** 
+  /**
  * The project column this card is associated under. A card may only belong to one
    * project column at a time. The column field will be null if the card is created
    * in a pending state and has yet to be associated with a column. Once cards are
@@ -9414,7 +9414,7 @@ export type PublicKey = Node & {
    __typename?: 'PublicKey',
   /** The last time this authorization was used to perform an action. Values will be null for keys not owned by the user. */
   accessedAt?: Maybe<Scalars['DateTime']>,
-  /** 
+  /**
  * Identifies the date and time when the key was created. Keys created before
    * March 5th, 2014 have inaccurate values. Values will be null for keys not owned by the user.
  */
@@ -9426,7 +9426,7 @@ export type PublicKey = Node & {
   isReadOnly?: Maybe<Scalars['Boolean']>,
   /** The public key string. */
   key: Scalars['String'],
-  /** 
+  /**
  * Identifies the date and time when the key was updated. Keys created before
    * March 5th, 2014 may have inaccurate values. Values will be null for keys not
    * owned by the user.
@@ -9493,7 +9493,7 @@ export type PullRequest = Assignable & Closable & Comment & Labelable & Lockable
   closed: Scalars['Boolean'],
   /** Identifies the date and time when the object was closed. */
   closedAt?: Maybe<Scalars['DateTime']>,
-  /** A list opf comments associated with the pull request. */
+  /** A list of comments associated with the pull request. */
   comments: IssueCommentConnection,
   /** A list of commits present in this pull request's head branch not present in the base branch. */
   commits: PullRequestCommitConnection,
@@ -9552,7 +9552,7 @@ export type PullRequest = Assignable & Closable & Comment & Labelable & Lockable
   participants: UserConnection,
   /** The permalink to the pull request. */
   permalink: Scalars['URI'],
-  /** 
+  /**
  * The commit that GitHub automatically generated to test if this pull request
    * could be merged. This field will not return a value if the pull request is
    * merged, or if the test merge commit is still being generated. See the
@@ -13314,7 +13314,7 @@ export type RepositoryWatchersArgs = {
 export enum RepositoryAffiliation {
   /** Repositories that the user has been added to as a collaborator. */
   Collaborator = 'COLLABORATOR',
-  /** 
+  /**
  * Repositories that the user has access to through being a member of an
    * organization. This includes every repository on every team that the user is on.
  */
@@ -13594,7 +13594,7 @@ export type RepositoryOwnerRepositoryArgs = {
 
 /** The access level to a repository */
 export enum RepositoryPermission {
-  /** 
+  /**
  * Can read, clone, and push to this repository. Can also manage issues, pull
    * requests, and repository settings, including adding collaborators
  */
@@ -13859,7 +13859,7 @@ export type ResolveReviewThreadPayload = {
 /** Represents a private contribution a user made on GitHub. */
 export type RestrictedContribution = Contribution & {
    __typename?: 'RestrictedContribution',
-  /** 
+  /**
  * Whether this contribution is associated with a record you do not have access to. For
    * example, your own 'first issue' contribution may have been made on a repository you can no
    * longer access.
@@ -14000,7 +14000,7 @@ export type ReviewRequestRemovedEvent = Node & {
   requestedReviewer?: Maybe<RequestedReviewer>,
 };
 
-/** 
+/**
  * A hovercard context with a message describing the current code review state of the pull
  * request.
  */
@@ -14303,7 +14303,7 @@ export type SecurityVulnerability = {
   severity: SecurityAdvisorySeverity,
   /** When the vulnerability was last updated */
   updatedAt: Scalars['DateTime'],
-  /** 
+  /**
  * A string that describes the vulnerable package versions.
    * This string follows a basic syntax with a few forms.
    * + `= 0.2.0` denotes a single vulnerable version.
@@ -14364,7 +14364,7 @@ export type SmimeSignature = GitSignature & {
   signature: Scalars['String'],
   /** GitHub user corresponding to the email signing this commit. */
   signer?: Maybe<User>,
-  /** 
+  /**
  * The state of this signature. `VALID` if signature is valid and verified by
    * GitHub, otherwise represents reason why signature is considered invalid.
  */
@@ -15708,7 +15708,7 @@ export type Topic = Node & Starrable & {
   id: Scalars['ID'],
   /** The topic's name. */
   name: Scalars['String'],
-  /** 
+  /**
  * A list of related topics, including aliases of this topic, sorted with the most relevant
    * first. Returns up to 10 Topics.
  */
@@ -15916,7 +15916,7 @@ export type UnknownSignature = GitSignature & {
   signature: Scalars['String'],
   /** GitHub user corresponding to the email signing this commit. */
   signer?: Maybe<User>,
-  /** 
+  /**
  * The state of this signature. `VALID` if signature is valid and verified by
    * GitHub, otherwise represents reason why signature is considered invalid.
  */
@@ -16237,7 +16237,7 @@ export type UpdateEnterpriseMembersCanCreateRepositoriesSettingInput = {
   membersCanCreatePublicRepositories?: Maybe<Scalars['Boolean']>,
   /** When false, allow member organizations to set their own repository creation member privileges. */
   membersCanCreateRepositoriesPolicyEnabled?: Maybe<Scalars['Boolean']>,
-  /** 
+  /**
  * Value for the members can create repositories setting on the enterprise. This
    * or the granular public/private/internal allowed fields (but not both) must be provided.
  */
@@ -16611,7 +16611,7 @@ export type UpdateProjectPayload = {
 export type UpdatePullRequestInput = {
   /** An array of Node IDs of users for this pull request. */
   assigneeIds?: Maybe<Array<Scalars['ID']>>,
-  /** 
+  /**
  * The name of the branch you want your changes pulled into. This should be an existing branch
    * on the current repository.
  */
@@ -16724,7 +16724,7 @@ export type UpdateRepositoryInput = {
   name?: Maybe<Scalars['String']>,
   /** The ID of the repository to update. */
   repositoryId: Scalars['ID'],
-  /** 
+  /**
  * Whether this repository should be marked as a template such that anyone who
    * can access it can create new repositories with the same files and directory structure.
  */
@@ -16784,7 +16784,7 @@ export type UpdateTeamDiscussionCommentPayload = {
 export type UpdateTeamDiscussionInput = {
   /** The updated text of the discussion. */
   body?: Maybe<Scalars['String']>,
-  /** 
+  /**
  * The current version of the body content. If provided, this update operation
    * will be rejected if the given version does not match the latest version on the server.
  */
@@ -16886,7 +16886,7 @@ export type User = Actor & Node & ProfileOwner & ProjectOwner & RegistryPackageO
   issueComments: IssueCommentConnection,
   /** A list of issues associated with this user. */
   issues: IssueConnection,
-  /** 
+  /**
  * Showcases a selection of repositories and gists that the profile owner has
    * either curated or that have been selected automatically based on popularity.
  */
