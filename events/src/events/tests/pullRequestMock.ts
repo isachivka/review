@@ -9,6 +9,7 @@ export const pullRequestMock: PullRequest = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   reviews: { nodes: [] },
+  commits: { nodes: [] },
 };
 
 export const pullRequestCommentedMock: PullRequest = {

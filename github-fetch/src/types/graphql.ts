@@ -5197,7 +5197,7 @@ export type LabelOrder = {
 export enum LabelOrderField {
   /** Order labels by creation time */
   CreatedAt = 'CREATED_AT',
-  /** Order labels by name  */
+  /** Order labels by name */
   Name = 'NAME'
 }
 
@@ -9493,7 +9493,7 @@ export type PullRequest = Assignable & Closable & Comment & Labelable & Lockable
   closed: Scalars['Boolean'],
   /** Identifies the date and time when the object was closed. */
   closedAt?: Maybe<Scalars['DateTime']>,
-  /** A list of comments associated with the pull request. */
+  /** A list opf comments associated with the pull request. */
   comments: IssueCommentConnection,
   /** A list of commits present in this pull request's head branch not present in the base branch. */
   commits: PullRequestCommitConnection,
@@ -17495,7 +17495,19 @@ export type PullRequestsQuery = (
       & { nodes: Maybe<Array<Maybe<(
         { __typename?: 'PullRequest' }
         & Pick<PullRequest, 'permalink' | 'createdAt' | 'updatedAt' | 'title' | 'baseRefName' | 'headRefName'>
-        & { reviews: Maybe<(
+        & { commits: (
+          { __typename?: 'PullRequestCommitConnection' }
+          & { nodes: Maybe<Array<Maybe<(
+            { __typename?: 'PullRequestCommit' }
+            & { commit: (
+              { __typename?: 'Commit' }
+              & { status: Maybe<(
+                { __typename?: 'Status' }
+                & Pick<Status, 'state'>
+              )> }
+            ) }
+          )>>> }
+        ), reviews: Maybe<(
           { __typename?: 'PullRequestReviewConnection' }
           & { nodes: Maybe<Array<Maybe<(
             { __typename?: 'PullRequestReview' }

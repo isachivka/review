@@ -3,9 +3,24 @@
   export let type;
 </script>
 
-<span class={value ? 'badge active ' + type: 'badge ' + type}>
-  <span>x{value && value.length || 0}</span>
-</span>
+{#if type === 'ci'}
+  <span
+    class={
+      'badge ' + type + ' ' + value
+    }
+  >
+  </span>
+{:else}
+  <span
+    class={
+      value
+        ? 'badge active ' + type
+        : 'badge ' + type
+    }
+  >
+    <span>x{value && value.length || 0}</span>
+  </span>
+{/if}
 
 <style>
 
@@ -24,6 +39,10 @@
     display: inline-block;
   }
 
+  .ci:before {
+    content: 'CI';
+    padding-right: 7px;
+  }
   .change:before {
     content: 'Change ';
   }
@@ -32,6 +51,14 @@
   }
 
 
+  .ci.SUCCESS {
+    background: #186419;
+    opacity: 1;
+  }
+  .ci.FAILURE {
+    background: #903e28;
+    opacity: 1;
+  }
   .approve.active {
     background: #186419;
     opacity: 1;
