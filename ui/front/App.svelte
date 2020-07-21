@@ -1,6 +1,5 @@
 <script>
-  import { Router, Link, Route } from "svelte-routing";
-  import { link } from "svelte-routing";
+  import { Router, link, links, Route } from "svelte-routing";
   import PullRequests from "./pullRequests/PullRequests.svelte";
   import MergedPullRequests from "./mergedPullRequests/MergedPullRequests.svelte";
   import Branches from "./branches/Branches.svelte";
@@ -12,9 +11,9 @@
 
 <Router url="{url}">
   <header>
-    <nav class="mainMenu">
+    <nav use:links class="mainMenu">
       <a use:link href="/">Pull Requests</a>
-      <a use:link href="/merged">Merged</a>
+      <a use:link href="/merged/timeline">Merged</a>
       <a use:link href="/branch">Branches</a>
       <a use:link href="/stacktrace">Stacktrace</a>
       <div class="grow"></div>
@@ -23,7 +22,7 @@
   </header>
   <div>
     <Route path="/" component="{PullRequests}" />
-    <Route path="/merged" component="{MergedPullRequests}" />
+    <Route path="/merged/*" component="{MergedPullRequests}" />
     <Route path="/branch" component="{Branches}" />
     <Route path="/ev" component="{Events}" />
     <Route path="/stacktrace" component="{Stacktrace}" />
