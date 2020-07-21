@@ -10,6 +10,16 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../../../')));
 
+app.get('/mergedPrs', (_, response) => {
+  doMongo(async (db, close) => {
+    const collection = db.collection('mergedPrs');
+    const pullRequests = await collection.find({}).toArray();
+    response.status(200);
+    response.send(pullRequests);
+    close();
+  });
+});
+
 app.get('/prs', (_, response) => {
   doMongo(async (db, close) => {
     const collection = db.collection('prs');
