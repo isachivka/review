@@ -19,21 +19,24 @@
   const filteredPullRequests = derived(
     [pullRequests, excludeRegExpString, searchRegExpString],
     ([$pullRequests, $excludeRegExpString, $searchRegExpString]) => {
-      const excludeRegExp = new RegExp($excludeRegExpString, 'i');
-      const searchRegExp = new RegExp($searchRegExpString, 'i');
-
-      return $pullRequests
-        .map(pr => {
-          return !$excludeRegExpString || !excludeRegExp.test(pr.headRefName)
-            ? pr
-            : { ...pr, hide: true };
-        })
-        .map(pr => {
-          return !$searchRegExpString || searchRegExp.test(pr.headRefName)
-            ? pr
-            : { ...pr, hide: true };
-        })
-
+      try {
+        const excludeRegExp = new RegExp($excludeRegExpString, 'i');
+        const searchRegExp = new RegExp($searchRegExpString, 'i');
+        return $pullRequests
+          .map(pr => {
+            return !$excludeRegExpString || !excludeRegExp.test(pr.headRefName)
+              ? pr
+              : { ...pr, hide: true };
+          })
+          .map(pr => {
+            return !$searchRegExpString || searchRegExp.test(pr.headRefName)
+              ? pr
+              : { ...pr, hide: true };
+          })
+      } catch (e) {
+        console.error(e);
+        return [];
+      }
     },
   );
 
