@@ -19,7 +19,8 @@ import doMongo from '@review/core/doMongo';
 
 logs.githubFetch.log('Successfully started');
 
-cron.schedule('* * * * *', () => {
+// Every hour fetch merged pull requests
+cron.schedule('* * * *', () => {
   const date2weeksAgo = format(sub(new Date(), { weeks: 2 }), 'yyyy-MM-dd');
   client.query<MergedPullRequestsQuery, MergedPullRequestsQueryVariables>({
     query: getMergedPullRequests,
@@ -46,6 +47,7 @@ cron.schedule('* * * * *', () => {
     })
 });
 
+// Every minute fetch open pull requests
 cron.schedule('* * * * *', () => {
   client.query<PullRequestsQuery, PullRequestsQueryVariables>({
     query: getPullRequests,
@@ -70,8 +72,8 @@ cron.schedule('* * * * *', () => {
     });
 });
 
-// Every ten minutes
-cron.schedule('*/10 * * * *', () => {
+// Every hour fetch all branches
+cron.schedule('* * * *', () => {
   getAllBranches()
     .then(mapBranches)
     .then((data: MappedBranches) => {
