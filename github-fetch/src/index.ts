@@ -2,18 +2,50 @@ import 'cross-fetch/polyfill';
 import cron from 'node-cron';
 import superagent from 'superagent';
 import config from 'config';
+import { format, sub } from 'date-fns';
+
 import client, { owner, repository } from './client';
 import getPullRequests from './queries/getPullRequests';
-import { PullRequestsQuery, PullRequestsQueryVariables } from './types/graphql';
+import getMergedPullRequests from './queries/getMergedPullRequests';
+import {
+  PullRequestsQuery,
+  PullRequestsQueryVariables,
+  MergedPullRequestsQuery,
+  MergedPullRequestsQueryVariables,
+} from './types/graphql';
 import logs from '@review/logs';
 import { getAllBranches, mapBranches, MappedBranches } from './branches';
 import doMongo from '@review/core/doMongo';
 
-const putApi = `${config.get('eventsApi')}/put`;
-
 logs.githubFetch.log('Successfully started');
 
-// Every minute
+cron.schedule('* * * * *', () => {
+  const date2weeksAgo = format(sub(new Date(), { weeks: 2 }), 'yyyy-MM-dd');
+  client.query<MergedPullRequestsQuery, MergedPullRequestsQueryVariables>({
+    query: getMergedPullRequests,
+    variables: { query: `repo:${owner}/${repository} is:pr is:merged merged:>${date2weeksAgo}` },
+    fetchPolicy: 'no-cache',
+  })
+    .then(({ data }) => {
+      if (data.search && data.search.edges) {
+        const { edges } = data.search;
+        const pullRequests = edges.map(edge => edge && edge.node);
+        superagent
+          .put(`${config.get('eventsApi')}/putMerged`)
+          .set('Content-Type', 'application/json')
+          .send(pullRequests)
+          .then((response) => {
+            logs.githubFetch.log(`Successfully send merged nodes. Response:`, response.text);
+          })
+          .catch((error) => {
+            logs.githubFetch.error(`Error send merged nodes:`, error);
+          });
+      } else {
+        logs.githubFetch.error(`Something wrong, response do not contains merged PullRequests`);
+      }
+    })
+});
+
 cron.schedule('* * * * *', () => {
   client.query<PullRequestsQuery, PullRequestsQueryVariables>({
     query: getPullRequests,
@@ -23,17 +55,17 @@ cron.schedule('* * * * *', () => {
     .then(({ data }) => {
       if (data.repository && data.repository.pullRequests.nodes) {
         superagent
-          .put(putApi)
+          .put(`${config.get('eventsApi')}/putOpened`)
           .set('Content-Type', 'application/json')
           .send(data.repository.pullRequests.nodes)
           .then((response) => {
-            logs.githubFetch.log('Successfully send nodes. Response:', response.text);
+            logs.githubFetch.log(`Successfully send open nodes. Response:`, response.text);
           })
           .catch((error) => {
-            logs.githubFetch.error('Error send nodes:', error);
+            logs.githubFetch.error(`Error send open nodes:`, error);
           });
       } else {
-        logs.githubFetch.error('Something wrong, response do not contains PullRequests');
+        logs.githubFetch.error(`Something wrong, response do not contains open PullRequests`);
       }
     });
 });
