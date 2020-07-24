@@ -2,6 +2,7 @@
   export let hide;
 
   import last from 'lodash/last';
+  import get from 'lodash/get';
   import groupBy from 'lodash/groupBy';
   import Badge from './Badge.svelte';
   import FromTo from './FromTo.svelte';
@@ -15,7 +16,8 @@
 
   $: reviews = groupBy(pullRequest.reviews.nodes, 'state');
 
-  $: ciStatus = pullRequest.commits.nodes[0].commit.status.state;
+  // Если commit.status отсутствует, значит есть конфликты
+  $: ciStatus = get(pullRequest, 'commits.nodes[0].commit.status.state', 'FAILURE');
   $: prNumber = last(pullRequest.permalink.split('/'));
   $: age = parseInt(
     (Date.now() - new Date(pullRequest.createdAt)) / 1000 / 60 / 60 / 24,
