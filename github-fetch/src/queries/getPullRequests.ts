@@ -9,6 +9,7 @@ export default gql`
           createdAt
           updatedAt
           title
+          isDraft
           baseRefName
           headRefName
           commits(last: 1) {
