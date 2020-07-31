@@ -27,6 +27,7 @@
 <tr
   class:passive="{pullRequest.hide}"
   class:hide={$hide}
+  class:dn={pullRequest.isDraft}
 >
   <td>
     <a href={pullRequest.permalink} target="_blank">#{prNumber}</a>
@@ -39,6 +40,9 @@
 </tr>
 
 <style>
+  .dn {
+    display: none;
+  }
   .passive {
     opacity: 0.3;
   }
