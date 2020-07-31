@@ -8,6 +8,7 @@ export const pullRequestMock: PullRequest = {
   headRefName: 'headRefName',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
+  isDraft: false,
   reviews: { nodes: [] },
   commits: { nodes: [] },
 };
