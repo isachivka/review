@@ -18,6 +18,7 @@
     "front": "yarn workspace @review/ui build && yarn workspace @review/ui dev:back",
     "front-dev": "yarn workspace @review/ui dev & yarn workspace @review/ui dev:back",
 
+    "types": "yarn workspace @review/github-fetch generate-types",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "test": "yarn jest"
   },
