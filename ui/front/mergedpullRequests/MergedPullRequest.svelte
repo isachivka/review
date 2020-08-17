@@ -2,15 +2,22 @@
   export let pullRequest;
 
   import last from 'lodash/last';
+  import uniq from 'lodash/uniq';
   import FromTo from '../pullRequests/FromTo.svelte';
 
   let age,
-    prNumber;
+    prNumber,
+    reviewers;
 
   $: age = parseInt(
     (Date.now() - new Date(pullRequest.mergedAt)) / 1000 / 60 / 60 / 24,
   );
   $: prNumber = last(pullRequest.permalink.split('/'));
+  $: {
+    reviewers = uniq(pullRequest.reviews.nodes.map(node => {
+      return node.author.login
+    }));
+  }
 </script>
 
 <tr
@@ -20,6 +27,11 @@
   <td class="second">{age} days ago</td>
   <td><FromTo pullRequest={pullRequest} /></td>
   <td><div class="login">{pullRequest.mergedBy.login}</div></td>
+  <td>
+    {#if reviewers.length > 0}
+      <span title="{reviewers}">🍪</span>
+    {/if}
+  </td>
 </tr>
 
 <style>
