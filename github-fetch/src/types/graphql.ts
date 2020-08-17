@@ -17909,6 +17909,42 @@ export type MergedPullRequestsQuery = (
         ) | (
           { __typename?: 'Mannequin' }
           & Pick<Mannequin, 'login' | 'avatarUrl' | 'url'>
+        )>, author: Maybe<(
+          { __typename?: 'EnterpriseUserAccount' }
+          & Pick<EnterpriseUserAccount, 'login'>
+        ) | (
+          { __typename?: 'Organization' }
+          & Pick<Organization, 'login'>
+        ) | (
+          { __typename?: 'User' }
+          & Pick<User, 'login'>
+        ) | (
+          { __typename?: 'Bot' }
+          & Pick<Bot, 'login'>
+        ) | (
+          { __typename?: 'Mannequin' }
+          & Pick<Mannequin, 'login'>
+        )>, reviews: Maybe<(
+          { __typename?: 'PullRequestReviewConnection' }
+          & { nodes: Maybe<Array<Maybe<(
+            { __typename?: 'PullRequestReview' }
+            & { author: Maybe<(
+              { __typename?: 'EnterpriseUserAccount' }
+              & Pick<EnterpriseUserAccount, 'login' | 'avatarUrl'>
+            ) | (
+              { __typename?: 'Organization' }
+              & Pick<Organization, 'login' | 'avatarUrl'>
+            ) | (
+              { __typename?: 'User' }
+              & Pick<User, 'login' | 'avatarUrl'>
+            ) | (
+              { __typename?: 'Bot' }
+              & Pick<Bot, 'login' | 'avatarUrl'>
+            ) | (
+              { __typename?: 'Mannequin' }
+              & Pick<Mannequin, 'login' | 'avatarUrl'>
+            )> }
+          )>>> }
         )> }
       ) | { __typename?: 'Repository' } | { __typename?: 'User' }> }
     )>>> }

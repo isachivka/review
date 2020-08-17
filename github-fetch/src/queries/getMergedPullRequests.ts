@@ -16,6 +16,17 @@ export default gql`
               avatarUrl
               url
             }
+            author {
+              login
+            }
+            reviews(last: 100) {
+              nodes {
+                author {
+                  login
+                  avatarUrl
+                }
+              }
+            }
           }
         }
       }
