@@ -1,4 +1,5 @@
 <script>
+  import { onDestroy } from 'svelte';
   import groupBy from 'lodash/groupBy';
   import { branches } from '../store';
   import AuthorBranches from './AuthorBranches.svelte';
@@ -21,6 +22,10 @@
   }
 
   window.addEventListener('copy', copy);
+
+  onDestroy(() => {
+    window.removeEventListener('copy', copy);
+  })
 
   $: {
     groupedBranches = Object.values(groupBy($branches, 'github'));
