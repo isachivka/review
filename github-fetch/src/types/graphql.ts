@@ -17911,19 +17911,19 @@ export type MergedPullRequestsQuery = (
           & Pick<Mannequin, 'login' | 'avatarUrl' | 'url'>
         )>, author: Maybe<(
           { __typename?: 'EnterpriseUserAccount' }
-          & Pick<EnterpriseUserAccount, 'login'>
+          & Pick<EnterpriseUserAccount, 'login' | 'avatarUrl'>
         ) | (
           { __typename?: 'Organization' }
-          & Pick<Organization, 'login'>
+          & Pick<Organization, 'login' | 'avatarUrl'>
         ) | (
           { __typename?: 'User' }
-          & Pick<User, 'login'>
+          & Pick<User, 'login' | 'avatarUrl'>
         ) | (
           { __typename?: 'Bot' }
-          & Pick<Bot, 'login'>
+          & Pick<Bot, 'login' | 'avatarUrl'>
         ) | (
           { __typename?: 'Mannequin' }
-          & Pick<Mannequin, 'login'>
+          & Pick<Mannequin, 'login' | 'avatarUrl'>
         )>, reviews: Maybe<(
           { __typename?: 'PullRequestReviewConnection' }
           & { nodes: Maybe<Array<Maybe<(
