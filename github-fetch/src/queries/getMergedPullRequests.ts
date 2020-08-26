@@ -18,6 +18,7 @@ export default gql`
             }
             author {
               login
+              avatarUrl
             }
             reviews(last: 100) {
               nodes {

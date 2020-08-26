@@ -21,7 +21,7 @@ export default gql`
               }
             }
           }
-          reviews(last: 10) {
+          reviews(last: 10, states: [APPROVED, CHANGES_REQUESTED]) {
             nodes {
               state
               author {
