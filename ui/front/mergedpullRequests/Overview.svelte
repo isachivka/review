@@ -1,35 +1,47 @@
 <script>
   import { mergedPullRequests } from '../store';
-  import groupBy from 'lodash/groupBy';
-  import sortBy from 'lodash/sortBy';
   import uniqBy from 'lodash/uniqBy';
-  import find from 'lodash/find';
+  import _sortBy from 'lodash/sortBy';
   import { writable, derived } from 'svelte/store';
   import Merger from './Merger.svelte';
-  import Reviewer from './Reviewer.svelte';
 
-  const mergers = derived(
-    [mergedPullRequests],
-    ([$mergedPullRequests]) => {
-      return sortBy(
-        Object.values(
-          groupBy($mergedPullRequests, (pr) => pr.mergedBy.login),
-        ),
-        e => e.length,
-      ).reverse();
-    },
-  );
+  const sortBy = writable('createdBy');
 
-  const reviewers = derived(
-    [mergedPullRequests],
-    ([$mergedPullRequests]) => {
-      const groupped = $mergedPullRequests.reduce((acc, pullRequest) => {
+  const getInitial = (user) => ({
+    user,
+    createdBy: [],
+    mergedBy: [],
+    reviewedBy: [],
+  })
+
+  function onClickSort(newSortBy) {
+    return () => {
+      $sortBy = newSortBy;
+    };
+  }
+  const onClickSortByCreated = onClickSort('createdBy');
+  const onClickSortByMerged = onClickSort('mergedBy');
+  const onClickSortByReviewed = onClickSort('reviewedBy');
+
+  const overview = derived(
+    [mergedPullRequests, sortBy],
+    ([$mergedPullRequests, $sortBy]) => {
+      const result = $mergedPullRequests.reduce((acc, pullRequest) => {
+
+        if (!acc[pullRequest.author.login]) acc[pullRequest.author.login] = getInitial(pullRequest.author);
+        const createdBy = acc[pullRequest.author.login].createdBy;
+        acc[pullRequest.author.login].createdBy = [...createdBy, pullRequest];
+
+        if (!acc[pullRequest.mergedBy.login]) acc[pullRequest.mergedBy.login] = getInitial(pullRequest.mergedBy);
+        const mergedBy = acc[pullRequest.mergedBy.login].mergedBy;
+        acc[pullRequest.mergedBy.login].mergedBy = [...mergedBy, pullRequest];
+
         pullRequest.reviews.nodes.forEach(review => {
-          if (review.author.login === pullRequest.author.login) {
-            return;
-          }
-          acc[review.author.login] = uniqBy([
-            ...(acc[review.author.login] || []),
+          if (review.author.login === pullRequest.author.login) return;
+
+          if (!acc[review.author.login]) acc[review.author.login] = getInitial(review.author);
+          acc[review.author.login].reviewedBy = uniqBy([
+            ...acc[review.author.login].reviewedBy,
             pullRequest,
           ], 'permalink');
         });
@@ -37,41 +49,41 @@
         return acc;
       }, {});
 
-      const grouppedArray = Object.keys(groupped).map((login) => {
-        return {
-          user: find(
-            groupped[login][0].reviews.nodes, node => node.author.login === login
-          ).author,
-          pullRequests: groupped[login],
-        };
-      });
-
-      return sortBy(grouppedArray, (group) => group.pullRequests.length).reverse();
+      return _sortBy(Object.values(result), (user) => user[$sortBy].length).reverse();
     },
   );
 
-  $: console.log($mergers);
-  $: console.log($reviewers);
+  $: console.log($overview);
 </script>
 
 <div class="flex">
-  <h2>Mergers</h2>
-  {#each $mergers as merger}
-    <Merger merger={merger} total={$mergedPullRequests.length} />
-  {/each}
-</div>
-
-<hr />
-
-<div class="flex">
-  <h2>Reviewers</h2>
-  {#each $reviewers as reviewer}
-    <Reviewer total={$mergedPullRequests.length} reviewer={reviewer} />
+  <ul class="sort">
+    Sort by:
+    <li class:active={$sortBy === 'mergedBy'} on:click={onClickSortByMerged}>merge</li>
+    <li class:active={$sortBy === 'createdBy'} on:click={onClickSortByCreated}>create</li>
+    <li class:active={$sortBy === 'reviewedBy'} on:click={onClickSortByReviewed}>review</li>
+  </ul>
+  {#each $overview as person}
+    <Merger key={person.user.login} person={person} total={$mergedPullRequests.length} />
   {/each}
 </div>
 
 <style>
   .flex {
+  }
+
+  .sort {
+    display: flex;
+    flex-direction: row;
+    margin: 0 0 30px;
+    padding: 0;
+  }
+  .sort li {
+    list-style: none;
+    margin-left: 10px;
+  }
+  .sort li.active {
+    border-bottom: 1px solid #fff;
   }
 
   hr {

@@ -17,7 +17,7 @@
     {#if $mergedPullRequests}
       <ul class="menu">
         <li><a use:link href="/merged/timeline"><h3>Timeline <sup>(2 weeks)</sup></h3></a></li>
-        <li><a use:link href="/merged/overview"><h3>Overview</h3></a></li>
+        <li><a use:link href="/merged/overview"><h3>Overview <sup>&nbsp;</sup></h3></a></li>
       </ul>
 
       <Route path="timeline" component={Timeline} />
