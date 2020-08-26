@@ -19,8 +19,7 @@ import doMongo from '@review/core/doMongo';
 
 logs.githubFetch.log('Successfully started');
 
-// Every hour fetch merged pull requests
-cron.schedule('*/60 * * * *', () => {
+function fetchMergedPullRequests() {
   const date2weeksAgo = format(sub(new Date(), { weeks: 2 }), 'yyyy-MM-dd');
   client.query<MergedPullRequestsQuery, MergedPullRequestsQueryVariables>({
     query: getMergedPullRequests,
@@ -45,10 +44,9 @@ cron.schedule('*/60 * * * *', () => {
         logs.githubFetch.error(`Something wrong, response do not contains merged PullRequests`);
       }
     })
-});
+}
 
-// Every minute fetch open pull requests
-cron.schedule('* * * * *', () => {
+function fetchOpenPullRequests() {
   client.query<PullRequestsQuery, PullRequestsQueryVariables>({
     query: getPullRequests,
     variables: { owner, repository },
@@ -70,10 +68,9 @@ cron.schedule('* * * * *', () => {
         logs.githubFetch.error(`Something wrong, response do not contains open PullRequests`);
       }
     });
-});
+}
 
-// Every hour fetch all branches
-cron.schedule('*/60 * * * *', () => {
+function fetchAllBranches() {
   getAllBranches()
     .then(mapBranches)
     .then((data: MappedBranches) => {
@@ -86,4 +83,16 @@ cron.schedule('*/60 * * * *', () => {
         close();
       });
     });
-});
+}
+
+fetchMergedPullRequests();
+fetchAllBranches();
+
+// Every hour fetch merged pull requests
+cron.schedule('*/60 * * * *', fetchMergedPullRequests);
+
+// Every minute fetch open pull requests
+cron.schedule('* * * * *', fetchOpenPullRequests);
+
+// Every hour fetch all branches
+cron.schedule('*/60 * * * *', fetchAllBranches);
